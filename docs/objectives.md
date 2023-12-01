@@ -38,3 +38,7 @@
 - `Green Circle` rewards extra `life` and 20 points.
 - `Orange hexagon` increases speed by 1.5x for 10 seconds and gives 10 points.
 - `White triangle` will make `opponents` disappear for 10 seconds.
+
+## File processing:
+- `Highscores` are read from a `.txt` file and are stored in an array of size 5.
+- If `highscore` is broken, array is updated and the `highscore` is replaced in the `.txt` file.
