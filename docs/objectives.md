@@ -16,3 +16,19 @@
 - `Opponent` starts at any turn of same roadway.
 - Arrow keys to turn.
 - Opponent can turn if it brings itself closer to player and may not otherwise.
+
+## Level Design
+- Next level when all gifts are picked up.
+- Going to next level resets positions and rewards 100 points.
+
+### Level 1:
+- `Opponent` cannot take top and bottom turns. 
+### Level 2:
+- `Opponent` can take any turn now.
+### Level 3:
+- `opponent` speed is increased.
+### Level 4:
+- `Opponents` don't get reset.
+- Speed is reduced to normal.
+- There are 2 `opponents`.
+- Display "You Won!" message after clearing the levels.
