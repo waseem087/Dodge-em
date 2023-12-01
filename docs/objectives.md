@@ -32,3 +32,9 @@
 - Speed is reduced to normal.
 - There are 2 `opponents`.
 - Display "You Won!" message after clearing the levels.
+
+## Food types:
+- `Red Rectangle` rewards 10 points.
+- `Green Circle` rewards extra `life` and 20 points.
+- `Orange hexagon` increases speed by 1.5x for 10 seconds and gives 10 points.
+- `White triangle` will make `opponents` disappear for 10 seconds.
