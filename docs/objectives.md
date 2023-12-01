@@ -42,3 +42,13 @@
 ## File processing:
 - `Highscores` are read from a `.txt` file and are stored in an array of size 5.
 - If `highscore` is broken, array is updated and the `highscore` is replaced in the `.txt` file.
+
+## Menu:
+1. Start a new game
+2. See high-scores
+3. Help
+4. Exit
+
+- Triggered by pressing corresponding `numeric key`.
+## Pause:
+- You can press `P` key to pause the game, which shows same options with 1 additional one, `5. Continue`.
