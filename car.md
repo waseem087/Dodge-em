@@ -20,4 +20,4 @@ The formula for moving the sprite might look something like:
 ```cpp
 this->speed * sf::Vector2i(a, b);
 ```
-> Note: `a` and `b` both can be set using a `switch` onto the `direction`.
+> Note: `a` and `b` can either be `1` or `-1`, set using a `switch` onto the `direction`.
