@@ -14,7 +14,7 @@ This gives the `opponent` class:
 
 Additional, the `class` will also contain:
 ```cpp
-void kill(Player target);
+void kill(Player& target);
 ```
-This is because any of the `opponents` can check if it is touching the player. 
+This is because any of the `opponents` can check if it is touching the `player`. 
 If it is, then it `kills` the player and itself by setting `isDead` to `true`.
