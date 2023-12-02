@@ -5,6 +5,7 @@ Since both of them have alot of similarities, we can use `inheritance`.
 This `class` will might contain things like:
 - `sf::Sprite` for its appearance.
 - `float speed` which is affected by `food` items.
+- `bool isDead` to check if the target is dead or alive.
 - A `Direction enum` such as:
 ```cpp
 enum Direction {
