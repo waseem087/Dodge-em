@@ -48,3 +48,4 @@ struct track {
     sf::Vector2i corners[4];
 };
 ```
+They will be set by `Arena constructor` based on the dimensions of it.
