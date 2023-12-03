@@ -48,4 +48,13 @@ struct track {
     sf::Vector2i corners[4];
 };
 ```
-They will be set by `Arena constructor` based on the dimensions of it.
+They will be set by `Arena constructor` based on the dimensions of it. 
+
+### Food
+The `Arena` will also contain [food](./food.md) items. 
+They are tracked by a 2-dimensional array called `foodMap`.  
+If we look at <a href="#fig_1.1">Fig 1.1</a>, we can think of the `tracks` as `rings` where `ring 0` represents the inner most `track`. 
+Let `ring number` be represented by `r` then for each `ring`, number of `food` items is: 
+\[ 4 + 8r \].  
+The total amount of food on the map is represented by equation:
+\[ \sum_{r = 0}^3 \(4 + 8r\) \]
