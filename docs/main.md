@@ -24,11 +24,11 @@ if (ticks.getElapsedTime().asMilliseconds() >= 1 / fps * 1000) {
     ticks.restart();    //restart the clock
 }
 ```
-For the rendering, we can use `render` functions for the objects:
+For the rendering, we can use `render` functions of the objects:
 ```cpp
 gameWindow.clear();     //to clear previous screen
-map.render(gameWindow);
-player.render(gameWindow);
-oppo.render(gameWindow);
+map.    render(gameWindow);
+player. render(gameWindow);
+oppo.   render(gameWindow);
 gameWindow.display();   //to display the rendered objects
 ```
