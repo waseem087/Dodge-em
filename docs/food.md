@@ -2,11 +2,12 @@
 ## Approach
 There are going to be 4 types of these classes. 
 ```cpp
-class Rect {};
-class Cric {};
-class Tri {};
-class Hex {};
+class Rect: public FoodItem {};
+class Cric: public FoodItem {};
+class Tri: public FoodItem {};
+class Hex: public FoodItem {};
 ```
+The `FoodItem` itself is just a wrapper `class` so we can access these classes through a `pointer`.
 
 ### Appearance
 Since these objects are `shape` based, we will use the builtin classes for their appearance such as:

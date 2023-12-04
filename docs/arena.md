@@ -59,3 +59,9 @@ $$\left( 4 + 8r \right)$$
 
 The total amount of food on the map is represented by equation:
 $$\sum_{r = 0}^3 \left(4 + 8r\right)$$
+Since the `foodMap` is in shape of a `square`, the dimensions are `m*m` where `m` is the `sqrt` of this result. 
+```cpp
+FoodItem* foodMap[8][8] = {0};
+```
+The constructor will iterate over this `map` and create `rand()` based food object and the address of it is stored in the grid.
+Then this grid can be utilized inside `foodEaten(Player&)` function.
