@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\zaidd\OneDrive\Desktop\Dodge-em\build\_deps\sfml-subbuild\CMakeFiles\5586b2d82633bf6e43df9efbe8ec078a\generate.stamp.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{061FF12B-B942-33A4-959F-EBDE5C600A75}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

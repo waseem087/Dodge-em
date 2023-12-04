@@ -1,0 +1,20 @@
+# CMake generation dependency list for this directory.
+C:/Users/zaidd/OneDrive/Desktop/Dodge-em/build/_deps/sfml-subbuild/CMakeFiles/3.27.3/CMakeSystem.cmake
+C:/Users/zaidd/OneDrive/Desktop/Dodge-em/build/_deps/sfml-subbuild/CMakeLists.txt
+C:/Users/zaidd/OneDrive/Desktop/Dodge-em/build/_deps/sfml-subbuild/sfml-populate-prefix/tmp/sfml-populate-mkdirs.cmake
+E:/CLI_Tools/CMake/share/cmake-3.27/Modules/CMakeGenericSystem.cmake
+E:/CLI_Tools/CMake/share/cmake-3.27/Modules/CMakeInitializeConfigs.cmake
+E:/CLI_Tools/CMake/share/cmake-3.27/Modules/CMakeSystemSpecificInformation.cmake
+E:/CLI_Tools/CMake/share/cmake-3.27/Modules/CMakeSystemSpecificInitialize.cmake
+E:/CLI_Tools/CMake/share/cmake-3.27/Modules/ExternalProject.cmake
+E:/CLI_Tools/CMake/share/cmake-3.27/Modules/ExternalProject/PatchInfo.txt.in
+E:/CLI_Tools/CMake/share/cmake-3.27/Modules/ExternalProject/RepositoryInfo.txt.in
+E:/CLI_Tools/CMake/share/cmake-3.27/Modules/ExternalProject/UpdateInfo.txt.in
+E:/CLI_Tools/CMake/share/cmake-3.27/Modules/ExternalProject/cfgcmd.txt.in
+E:/CLI_Tools/CMake/share/cmake-3.27/Modules/ExternalProject/gitclone.cmake.in
+E:/CLI_Tools/CMake/share/cmake-3.27/Modules/ExternalProject/gitupdate.cmake.in
+E:/CLI_Tools/CMake/share/cmake-3.27/Modules/ExternalProject/mkdirs.cmake.in
+E:/CLI_Tools/CMake/share/cmake-3.27/Modules/ExternalProject/shared_internal_commands.cmake
+E:/CLI_Tools/CMake/share/cmake-3.27/Modules/Platform/Windows-Initialize.cmake
+E:/CLI_Tools/CMake/share/cmake-3.27/Modules/Platform/Windows.cmake
+E:/CLI_Tools/CMake/share/cmake-3.27/Modules/Platform/WindowsPaths.cmake

@@ -1,0 +1,8 @@
+# CMake generation dependency list for this directory.
+C:/Users/zaidd/OneDrive/Desktop/Dodge-em/build/_deps/sfml-src/cmake/Modules/FindFLAC.cmake
+C:/Users/zaidd/OneDrive/Desktop/Dodge-em/build/_deps/sfml-src/cmake/Modules/FindVORBIS.cmake
+C:/Users/zaidd/OneDrive/Desktop/Dodge-em/build/_deps/sfml-src/src/SFML/Audio/CMakeLists.txt
+C:/Users/zaidd/OneDrive/Desktop/Dodge-em/build/_deps/sfml-src/tools/windows/resource.rc.in
+E:/CLI_Tools/CMake/share/cmake-3.27/Modules/FindOpenAL.cmake
+E:/CLI_Tools/CMake/share/cmake-3.27/Modules/FindPackageHandleStandardArgs.cmake
+E:/CLI_Tools/CMake/share/cmake-3.27/Modules/FindPackageMessage.cmake

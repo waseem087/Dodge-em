@@ -1,0 +1,10 @@
+^C:\USERS\ZAIDD\ONEDRIVE\DESKTOP\DODGE-EM\BUILD\_DEPS\SFML-SRC\SRC\SFML\GRAPHICS\CMAKELISTS.TXT
+setlocal
+E:\CLI_Tools\CMake\bin\cmake.exe -SC:/Users/zaidd/OneDrive/Desktop/Dodge-em -BC:/Users/zaidd/OneDrive/Desktop/Dodge-em/build --check-stamp-file C:/Users/zaidd/OneDrive/Desktop/Dodge-em/build/_deps/sfml-build/src/SFML/Graphics/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
