@@ -33,17 +33,17 @@ void Arena::initialize(sf::RenderWindow& target_w) {
             (i / 2) ? -1 : 1
         );
 
-        this->spriteSize = {
+        this->spriteSize[0] = {
             arenaTiles[i].getGlobalBounds().width,
             arenaTiles[i].getGlobalBounds().height
         };
 
         arenaTiles[i].setPosition(
-            (spriteSize.x + padding.x) / 2 + 
-            (i % 2) * (spriteSize.x + gap),
+            (spriteSize[0].x + padding.x) / 2 + 
+            (i % 2) * (spriteSize[0].x + gap),
 
-            (spriteSize.y + padding.y) / 2 + 
-            (i / 2) * (spriteSize.y + gap)
+            (spriteSize[0].y + padding.y) / 2 + 
+            (i / 2) * (spriteSize[0].y + gap)
         );
 
     }
