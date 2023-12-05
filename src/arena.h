@@ -8,7 +8,8 @@ class Arena {
     // sf::Vector2f tileSize_sub = {50, 50};
     sf::Texture cornerTexture;
     sf::Sprite arenaTiles[5];
-
+    sf::Vector2f spriteSize;
+    
     public:
     Arena();
 
