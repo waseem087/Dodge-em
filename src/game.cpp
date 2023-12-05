@@ -9,6 +9,7 @@ Game::Game() {
 void Game::update(sf::RenderWindow& target_w) {
     target_w.clear(sf::Color::Black);
     target_w.draw(background);
+    this->arena.render(target_w);
     target_w.display();
 }
 
@@ -24,7 +25,9 @@ void Game::handleEvents(sf::Event& e, sf::RenderWindow& target_w) {
 
 void Game::start_game() {
 
-    sf::RenderWindow gameWindow(sf::VideoMode(1000, 700), title);
+    sf::RenderWindow gameWindow(sf::VideoMode(1000, 700), TITLE);
+
+    this->arena.initialize(gameWindow);
 
     sf::Clock ticks;
     float fps = 60;

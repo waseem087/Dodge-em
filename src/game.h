@@ -1,15 +1,17 @@
 #include <SFML/Graphics.hpp>
 #include <time.h>
 #include <iostream>
-// using namespace std;
 
-#define title "OOP-Project, Spring-2023"
-// using namespace sf;
+#include "arena.h"
+
+#define TITLE "OOP-Project, Spring-2023"
 
 class Game {
     private:
     sf::Texture bg_texture;
     sf::Sprite background; // Game background sprite
+
+    Arena arena;
 
     void update(sf::RenderWindow& target_w);
     void handleEvents(sf::Event& e, sf::RenderWindow& target_w);
