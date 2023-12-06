@@ -4,7 +4,7 @@
 #include <iostream>
 class Arena {
     private:
-    sf::Texture cornerTexture;
+    sf::Texture cornerTexture, centerTexture;
     sf::Sprite arenaTiles[5];
     sf::Vector2f spriteSize[2];     //1 for center, 1 for corner
 
