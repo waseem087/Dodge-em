@@ -73,8 +73,9 @@ void Arena::initialize(sf::RenderWindow& target_w) {
     float roadMid = (wallThickness * 2 + roadSize) / 2;
     sf::Vector2f trackPointer = {roadMid + padding.x, roadMid + padding.y};
 
-    for (int j = 0; j < 1; j++) {
+    for (int j = 0; j < 4; j++) {
         ring[j].initialize(trackPointer, target_w);
+        trackPointer += sf::Vector2f(wallThickness + roadSize, wallThickness + roadSize);
     }
 
 }
@@ -82,6 +83,10 @@ void Arena::initialize(sf::RenderWindow& target_w) {
 void Arena::render(sf::RenderWindow& target_w) {
     for (int i = 0; i < 5; i++) {
         target_w.draw(arenaTiles[i]);
+
+        if (i == 4)
+            break;
+
+        ring[i].render(target_w);
     }
-    ring[0].render(target_w);
 }
