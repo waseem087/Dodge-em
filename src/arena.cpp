@@ -19,9 +19,15 @@ void Arena::initialize(sf::RenderWindow& target_w) {
     
     int gap = 150;
 
+    //since all the corner tiles have same dimensions and same scales
+    spriteSize[0] = {
+        arenaTiles[0].getGlobalBounds().width,
+        arenaTiles[0].getGlobalBounds().height
+    };
+
     sf::Vector2f padding = {
-        target_w.getSize().x - (gap + 2 * arenaTiles[0].getGlobalBounds().width), 
-        target_w.getSize().y - (gap + 2 * arenaTiles[0].getGlobalBounds().height)
+        (target_w.getSize().x - (gap + 2 * spriteSize[0].x)) / 2,
+        (target_w.getSize().y - (gap + 2 * spriteSize[0].y)) / 2
     };
 
     for (int i = 0; i < 4; i++) {
@@ -37,16 +43,11 @@ void Arena::initialize(sf::RenderWindow& target_w) {
             (i / 2) ? -1 : 1
         );
 
-        this->spriteSize[0] = {
-            arenaTiles[i].getGlobalBounds().width,
-            arenaTiles[i].getGlobalBounds().height
-        };
-
         arenaTiles[i].setPosition(
-            (spriteSize[0].x + padding.x) / 2 + 
+            (spriteSize[0].x / 2 + padding.x) + 
             (i % 2) * (spriteSize[0].x + gap),
 
-            (spriteSize[0].y + padding.y) / 2 + 
+            (spriteSize[0].y / 2 + padding.y)+ 
             (i / 2) * (spriteSize[0].y + gap)
         );
 
@@ -57,7 +58,7 @@ void Arena::initialize(sf::RenderWindow& target_w) {
         centerTexture.getSize().y / 2
     );
 
-    this->spriteSize[1] = {
+    spriteSize[1] = {
         arenaTiles[4].getGlobalBounds().width,
         arenaTiles[4].getGlobalBounds().height
     };
@@ -67,7 +68,6 @@ void Arena::initialize(sf::RenderWindow& target_w) {
         target_w.getSize().y / 2
     );
 
-    float arenaSize = spriteSize[0].x * 2 + gap;
     float wallThickness = cornerScale.x * 56;
     float roadSize =  cornerScale.x * 69;
     float roadMid = (wallThickness * 2 + roadSize) / 2;

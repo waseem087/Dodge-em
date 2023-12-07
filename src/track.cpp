@@ -21,6 +21,6 @@ void Track::initialize(sf::Vector2f referenceCorner, sf::RenderWindow& target_w)
 
 void Track::render(sf::RenderWindow& target_w) {
 
-    target_w.draw(this->corner);
+    target_w.draw(corner);
 
 }
