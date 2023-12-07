@@ -7,11 +7,11 @@ Arena::Arena() {
 
     for (int i = 0; i < 4; i++) {
         arenaTiles[i].setTexture(cornerTexture);
-        arenaTiles[i].setScale(0.5, 0.5);
+        arenaTiles[i].setScale(cornerScale);
     }
 
     arenaTiles[4].setTexture(centerTexture);
-    arenaTiles[4].setScale(0.25, 0.25);
+    arenaTiles[4].setScale(centerScale);
 
 }
 
@@ -67,10 +67,21 @@ void Arena::initialize(sf::RenderWindow& target_w) {
         target_w.getSize().y / 2
     );
 
+    float arenaSize = spriteSize[0].x * 2 + gap;
+    float wallThickness = cornerScale.x * 56;
+    float roadSize =  cornerScale.x * 69;
+    float roadMid = (wallThickness * 2 + roadSize) / 2;
+    sf::Vector2f trackPointer = {roadMid + padding.x, roadMid + padding.y};
+
+    for (int j = 0; j < 1; j++) {
+        ring[j].initialize(trackPointer, target_w);
+    }
+
 }
 
 void Arena::render(sf::RenderWindow& target_w) {
     for (int i = 0; i < 5; i++) {
         target_w.draw(arenaTiles[i]);
     }
+    ring[0].render(target_w);
 }

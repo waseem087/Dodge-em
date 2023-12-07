@@ -9,7 +9,7 @@ FetchContent_Declare(SFML
     GIT_TAG 2.6.x)
 FetchContent_MakeAvailable(SFML)
 
-add_executable(Dodge_em src/Source.cpp src/game.cpp src/arena.cpp)
+add_executable(Dodge_em src/Source.cpp src/game.cpp src/arena.cpp src/track.cpp)
 target_link_libraries(Dodge_em PRIVATE sfml-graphics)
 target_compile_features(Dodge_em PRIVATE cxx_std_17)
 
