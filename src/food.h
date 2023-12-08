@@ -15,12 +15,6 @@ class Rect : public FoodItem {
     sf::RectangleShape appearance;
 
     public:
-    Rect () {
-        std::cout << "Rect constructor called" << std::endl;
-    }
-    ~Rect () {
-        std::cout << "Rect destructor called" << std::endl;
-    }
     void initialize(sf::Vector2f size);
     void render(sf::RenderWindow& target_w);
 };
@@ -30,12 +24,6 @@ class Cir : public FoodItem {
     sf::CircleShape appearance;
 
     public:
-    Cir () {
-        std::cout << "Cir constructor called" << std::endl;
-    }
-    ~Cir () {
-        std::cout << "Cir destructor called" << std::endl;
-    }
     void initialize(float radius);
     void render(sf::RenderWindow& target_w);
 };
@@ -45,12 +33,6 @@ class Hex : public FoodItem {
     sf::CircleShape appearance;
 
     public:
-    Hex () {
-        std::cout << "Hex constructor called" << std::endl;
-    }
-    ~Hex () {
-        std::cout << "Hex destructor called" << std::endl;
-    }
     void initialize(float length);
     void render(sf::RenderWindow& target_w);
 };
@@ -60,12 +42,6 @@ class Tri : public FoodItem {
     sf::CircleShape appearance;
 
     public:
-    Tri () {
-        std::cout << "Tri constructor called" << std::endl;
-    }
-    ~Tri () {
-        std::cout << "Tri destructor called" << std::endl;
-    }
     void initialize(float length);
     void render(sf::RenderWindow& target_w);
 };

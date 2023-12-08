@@ -13,6 +13,42 @@ Arena::Arena() {
     arenaTiles[4].setTexture(centerTexture);
     arenaTiles[4].setScale(centerScale);
 
+    srand(time(0));
+
+    for (int j = 0; j < 8; j++) {
+        for (int z = 0; z < 8; z++) {
+
+            int magicNum = rand() % 4;
+            std::cout << "Magic: " << magicNum << std::endl;
+            
+            switch (magicNum) {
+            case 0:
+                foodMap[j][z] = new Rect;
+                break;
+            case 1:
+                foodMap[j][z] = new Cir;
+                break;
+            case 2:
+                foodMap[j][z] = new Hex;
+                break;
+            case 3:
+                foodMap[j][z] = new Tri;
+                break;
+            default:
+                break;
+            }
+        }
+    }
+
+}
+
+Arena::~Arena() {
+    for (int j = 0; j < 8; j++) {
+        for (int z = 0; z < 8; z++) {
+            std::cout << "Deleting: " << j << ", " << z << std::endl;
+            delete foodMap[j][z];
+        }
+    }
 }
 
 void Arena::initialize(sf::RenderWindow& target_w) {
@@ -89,4 +125,5 @@ void Arena::render(sf::RenderWindow& target_w) {
 
         ring[i].render(target_w);
     }
+
 }
