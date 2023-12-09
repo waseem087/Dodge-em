@@ -19,20 +19,20 @@ Arena::Arena() {
         for (int z = 0; z < 8; z++) {
 
             int magicNum = rand() % 4;
-            std::cout << "Magic: " << magicNum << std::endl;
+            // std::cout << "Magic: " << magicNum << std::endl;
             
             switch (magicNum) {
             case 0:
-                foodMap[j][z] = new Rect;
+                foodMap[j][z] = new Rect(sf::Vector2f(40, 20));
                 break;
             case 1:
-                foodMap[j][z] = new Cir;
+                foodMap[j][z] = new Cir(10);
                 break;
             case 2:
-                foodMap[j][z] = new Hex;
+                foodMap[j][z] = new Hex(10);
                 break;
             case 3:
-                foodMap[j][z] = new Tri;
+                foodMap[j][z] = new Tri(10);
                 break;
             default:
                 break;
@@ -45,7 +45,6 @@ Arena::Arena() {
 Arena::~Arena() {
     for (int j = 0; j < 8; j++) {
         for (int z = 0; z < 8; z++) {
-            std::cout << "Deleting: " << j << ", " << z << std::endl;
             delete foodMap[j][z];
         }
     }
@@ -114,6 +113,48 @@ void Arena::initialize(sf::RenderWindow& target_w) {
         trackPointer += sf::Vector2f(wallThickness + roadSize, wallThickness + roadSize);
     }
 
+    for (int i = 0; i < 4; i++) {
+
+        int foodCount = 28 - (8 * i);
+
+        sf::Vector2f spacing = {
+            (ring[i].corner[1].position.x - ring[i].corner[0].position.x - gap) / (foodCount / 4),
+            (ring[i].corner[2].position.y - ring[i].corner[1].position.y - gap) / (foodCount / 4)
+        };
+
+        int foodPerSide = (foodCount / 4) + 1;
+
+        sf::Vector2i foodIndex = {0, 0};
+
+        for (int j = i; j < foodPerSide + i; j++) {
+            
+            int z = i;
+
+            while (z < foodPerSide + i) {
+                foodMap[j][z]->setPosition(sf::Vector2f(
+                    ring[i].corner[0].position.x + spacing.x * foodIndex.x + ((z > 3) ? gap : 0),
+                    ring[i].corner[0].position.y + spacing.y * foodIndex.y + ((j > 3) ? gap : 0)
+                ));
+
+                foodMap[j][z]->update();
+
+                if ((j == i || j == foodPerSide - 1 + i)){
+                    foodIndex.x++;
+                    z++;
+                }
+                else {
+                    foodIndex.x += foodPerSide - 1;
+                    z += foodPerSide - 1;
+                }
+            }
+
+            foodIndex.x = 0;
+            foodIndex.y++;
+
+        }
+    
+    }
+
 }
 
 void Arena::render(sf::RenderWindow& target_w) {
@@ -124,6 +165,12 @@ void Arena::render(sf::RenderWindow& target_w) {
             break;
 
         ring[i].render(target_w);
+    }
+
+    for (int j = 0; j < 8; j++) {
+        for (int z = 0; z < 8; z++) {
+            foodMap[j][z]->render(target_w);
+        }
     }
 
 }

@@ -8,26 +8,30 @@ sf::Vector2f FoodItem::getPosition() {
     return this->position;
 }
 
-void Rect::initialize(sf::Vector2f size) {
+Rect::Rect(sf::Vector2f size) {
     this->appearance = sf::RectangleShape(size);
     this->appearance.setFillColor(sf::Color::Red);
+    this->appearance.setOrigin(size.x/2, size.y/2);
 }
 
-void Cir::initialize(float radius) {
+Cir::Cir(float radius) {
     this->appearance = sf::CircleShape(radius);
     this->appearance.setFillColor(sf::Color::Green);
+    this->appearance.setOrigin(radius, radius);
 }
 
-void Hex::initialize(float length) {
+Hex::Hex(float length) {
     sf::Color color(255, 213, 128);
 
     this->appearance = sf::CircleShape(length, 6);
     this->appearance.setFillColor(color);
+    this->appearance.setOrigin(length, length);
 }
 
-void Tri::initialize(float length) {
+Tri::Tri(float length) {
     this->appearance = sf::CircleShape(length, 3);
     this->appearance.setFillColor(sf::Color::White);
+    this->appearance.setOrigin(length, length);
 }
 
 void Rect::render(sf::RenderWindow& target_w) {
@@ -44,4 +48,20 @@ void Hex::render(sf::RenderWindow& target_w) {
 
 void Tri::render(sf::RenderWindow& target_w) {
     target_w.draw(this->appearance);
+}
+
+void Rect::update() {
+    this->appearance.setPosition(this->getPosition());
+}
+
+void Cir::update() {
+    this->appearance.setPosition(this->getPosition());
+}
+
+void Hex::update() {
+    this->appearance.setPosition(this->getPosition());
+}
+
+void Tri::update() {
+    this->appearance.setPosition(this->getPosition());
 }

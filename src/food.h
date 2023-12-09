@@ -8,6 +8,9 @@ class FoodItem {
     public:
     void setPosition(sf::Vector2f position);
     sf::Vector2f getPosition();
+
+    virtual void render(sf::RenderWindow&) {};
+    virtual void update() {};
 };
 
 class Rect : public FoodItem {
@@ -15,8 +18,9 @@ class Rect : public FoodItem {
     sf::RectangleShape appearance;
 
     public:
-    void initialize(sf::Vector2f size);
-    void render(sf::RenderWindow& target_w);
+    Rect(sf::Vector2f size);
+    void render(sf::RenderWindow& target_w) override;
+    void update() override;
 };
 
 class Cir : public FoodItem {
@@ -24,8 +28,9 @@ class Cir : public FoodItem {
     sf::CircleShape appearance;
 
     public:
-    void initialize(float radius);
-    void render(sf::RenderWindow& target_w);
+    Cir(float radius);
+    void render(sf::RenderWindow& target_w) override;
+    void update() override;
 };
 
 class Hex : public FoodItem {
@@ -33,8 +38,9 @@ class Hex : public FoodItem {
     sf::CircleShape appearance;
 
     public:
-    void initialize(float length);
-    void render(sf::RenderWindow& target_w);
+    Hex(float length);
+    void render(sf::RenderWindow& target_w) override;
+    void update() override;
 };
 
 class Tri : public FoodItem {
@@ -42,6 +48,7 @@ class Tri : public FoodItem {
     sf::CircleShape appearance;
 
     public:
-    void initialize(float length);
-    void render(sf::RenderWindow& target_w);
+    Tri(float length);
+    void render(sf::RenderWindow& target_w) override;
+    void update() override;
 };
