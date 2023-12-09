@@ -8,6 +8,18 @@ sf::Vector2f FoodItem::getPosition() {
     return this->position;
 }
 
+void FoodItem::render(sf::RenderWindow& target_w, sf::Shape* appearance) {
+    target_w.draw(*appearance);
+}
+
+bool FoodItem::collides(Player& player, sf::Shape* target) {
+    return target->getGlobalBounds().intersects(player.getAppearance()->getGlobalBounds());
+}
+
+void FoodItem::update(sf::Shape* target) {
+    target->setPosition(this->getPosition());
+}
+
 Rect::Rect(sf::Vector2f size) {
     this->appearance = sf::RectangleShape(size);
     this->appearance.setFillColor(sf::Color::Red);
@@ -34,50 +46,18 @@ Tri::Tri(float length) {
     this->appearance.setOrigin(length, length);
 }
 
-void Rect::render(sf::RenderWindow& target_w) {
-    target_w.draw(this->appearance);
+sf::Shape* Rect::getAppearance() {
+    return &this->appearance;
 }
 
-void Cir::render(sf::RenderWindow& target_w) {
-    target_w.draw(this->appearance);
+sf::Shape* Cir::getAppearance() {
+    return &this->appearance;
 }
 
-void Hex::render(sf::RenderWindow& target_w) {
-    target_w.draw(this->appearance);
+sf::Shape* Hex::getAppearance() {
+    return &this->appearance;
 }
 
-void Tri::render(sf::RenderWindow& target_w) {
-    target_w.draw(this->appearance);
-}
-
-void Rect::update() {
-    this->appearance.setPosition(this->getPosition());
-}
-
-void Cir::update() {
-    this->appearance.setPosition(this->getPosition());
-}
-
-void Hex::update() {
-    this->appearance.setPosition(this->getPosition());
-}
-
-void Tri::update() {
-    this->appearance.setPosition(this->getPosition());
-}
-
-bool Rect::collides(Player& player) {
-    return this->appearance.getGlobalBounds().intersects(player.getAppearance()->getGlobalBounds());
-}
-
-bool Cir::collides(Player& player) {
-    return this->appearance.getGlobalBounds().intersects(player.getAppearance()->getGlobalBounds());
-}
-
-bool Hex::collides(Player& player) {
-    return this->appearance.getGlobalBounds().intersects(player.getAppearance()->getGlobalBounds());
-}
-
-bool Tri::collides(Player& player) {
-    return this->appearance.getGlobalBounds().intersects(player.getAppearance()->getGlobalBounds());
+sf::Shape* Tri::getAppearance() {
+    return &this->appearance;
 }

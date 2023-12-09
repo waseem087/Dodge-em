@@ -6,14 +6,16 @@
 class FoodItem {
     private:
     sf::Vector2f position;
+    sf::Shape* appearance;
 
     public:
     void setPosition(sf::Vector2f position);
     sf::Vector2f getPosition();
 
-    virtual void render(sf::RenderWindow&) {};
-    virtual void update() {};
-    virtual bool collides(Player&){return false;};
+    virtual sf::Shape* getAppearance() {return nullptr;};
+    virtual void render(sf::RenderWindow&, sf::Shape* appearance);
+    void update(sf::Shape*);
+    bool collides(Player&, sf::Shape*);
 };
 
 class Rect : public FoodItem {
@@ -22,9 +24,7 @@ class Rect : public FoodItem {
 
     public:
     Rect(sf::Vector2f size);
-    void render(sf::RenderWindow& target_w) override;
-    void update() override;
-    bool collides(Player& player) override;
+    sf::Shape* getAppearance() override;
 };
 
 class Cir : public FoodItem {
@@ -33,9 +33,7 @@ class Cir : public FoodItem {
 
     public:
     Cir(float radius);
-    void render(sf::RenderWindow& target_w) override;
-    void update() override;
-    bool collides(Player& player) override;
+    sf::Shape* getAppearance() override;
 };
 
 class Hex : public FoodItem {
@@ -44,9 +42,7 @@ class Hex : public FoodItem {
 
     public:
     Hex(float length);
-    void render(sf::RenderWindow& target_w) override;
-    void update() override;
-    bool collides(Player& player) override;
+    sf::Shape* getAppearance() override;
 };
 
 class Tri : public FoodItem {
@@ -55,7 +51,5 @@ class Tri : public FoodItem {
 
     public:
     Tri(float length);
-    void render(sf::RenderWindow& target_w) override;
-    void update() override;
-    bool collides(Player& player) override;
+    sf::Shape* getAppearance() override;
 };

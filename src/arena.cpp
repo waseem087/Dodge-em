@@ -19,7 +19,6 @@ Arena::Arena() {
         for (int z = 0; z < 8; z++) {
 
             int magicNum = rand() % 4;
-            // std::cout << "Magic: " << magicNum << std::endl;
             
             switch (magicNum) {
             case 0:
@@ -136,7 +135,7 @@ void Arena::initialize(sf::RenderWindow& target_w) {
                     ring[i].corner[0].position.y + spacing.y * foodIndex.y + ((j > 3) ? gap : 0)
                 ));
 
-                foodMap[j][z]->update();
+                foodMap[j][z]->update(foodMap[j][z]->getAppearance());
 
                 if ((j == i || j == foodPerSide - 1 + i)){
                     foodIndex.x++;
@@ -170,7 +169,7 @@ void Arena::render(sf::RenderWindow& target_w) {
     for (int j = 0; j < 8; j++) {
         for (int z = 0; z < 8; z++) {
             if (foodMap[j][z] != nullptr)
-                foodMap[j][z]->render(target_w);
+                foodMap[j][z]->render(target_w, foodMap[j][z]->getAppearance());
         }
     }
 
@@ -179,7 +178,7 @@ void Arena::render(sf::RenderWindow& target_w) {
 void Arena::foodConsumption(Player& player) {
     for (int i = 0; i < 8; i++) {
         for (int z = 0; z < 8; z++) {
-            if (foodMap[i][z] == nullptr || !foodMap[i][z]->collides(player)) continue;
+            if (foodMap[i][z] == nullptr || !foodMap[i][z]->collides(player, foodMap[i][z]->getAppearance())) continue;
             
             delete foodMap[i][z];
             foodMap[i][z] = nullptr;
