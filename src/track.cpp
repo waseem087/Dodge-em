@@ -15,6 +15,9 @@ void Track::initialize(sf::Vector2f referenceCorner, sf::RenderWindow& target_w)
         this->corner[i].position = positionVector;
         this->corner[i].color = sf::Color::White;
 
+        if (i < 4)
+            this->corners[i] = positionVector;
+
     }
 
 }
@@ -23,4 +26,8 @@ void Track::render(sf::RenderWindow& target_w) {
 
     target_w.draw(corner);
 
+}
+
+sf::Vector2f* Track::getCorners() {
+    return corners;
 }

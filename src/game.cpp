@@ -46,7 +46,13 @@ void Game::start_game() {
             handleEvents(e, gameWindow);
         }
 
-        if (physicsTicks.getElapsedTime().asMilliseconds() >= 200) {
+        if (physicsTicks.getElapsedTime().asMilliseconds() >= 20) {
+
+            int trackID = player.getTrackID();
+            Track* currentTrack = arena.getTrack(trackID);
+
+            player.update(currentTrack->getCorners());
+
             physicsTicks.restart();
         }
 

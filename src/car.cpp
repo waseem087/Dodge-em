@@ -7,7 +7,6 @@ sf::Sprite* Car::getAppearance() {
 void Car::initialize(sf::Vector2f pos) {
     appearance.setOrigin(texture.getSize().x / 2, texture.getSize().y / 2);
     appearance.setScale(0.05, 0.05);
-    current_dir = Direction::Left;
     appearance.setPosition(pos);
 }
 
