@@ -1,6 +1,8 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 
+#include "player.h"
+
 class FoodItem {
     private:
     sf::Vector2f position;
@@ -11,6 +13,7 @@ class FoodItem {
 
     virtual void render(sf::RenderWindow&) {};
     virtual void update() {};
+    virtual bool collides(Player&){return false;};
 };
 
 class Rect : public FoodItem {
@@ -21,6 +24,7 @@ class Rect : public FoodItem {
     Rect(sf::Vector2f size);
     void render(sf::RenderWindow& target_w) override;
     void update() override;
+    bool collides(Player& player) override;
 };
 
 class Cir : public FoodItem {
@@ -31,6 +35,7 @@ class Cir : public FoodItem {
     Cir(float radius);
     void render(sf::RenderWindow& target_w) override;
     void update() override;
+    bool collides(Player& player) override;
 };
 
 class Hex : public FoodItem {
@@ -41,6 +46,7 @@ class Hex : public FoodItem {
     Hex(float length);
     void render(sf::RenderWindow& target_w) override;
     void update() override;
+    bool collides(Player& player) override;
 };
 
 class Tri : public FoodItem {
@@ -51,4 +57,5 @@ class Tri : public FoodItem {
     Tri(float length);
     void render(sf::RenderWindow& target_w) override;
     void update() override;
+    bool collides(Player& player) override;
 };

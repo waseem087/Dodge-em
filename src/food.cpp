@@ -65,3 +65,19 @@ void Hex::update() {
 void Tri::update() {
     this->appearance.setPosition(this->getPosition());
 }
+
+bool Rect::collides(Player& player) {
+    return this->appearance.getGlobalBounds().intersects(player.getAppearance()->getGlobalBounds());
+}
+
+bool Cir::collides(Player& player) {
+    return this->appearance.getGlobalBounds().intersects(player.getAppearance()->getGlobalBounds());
+}
+
+bool Hex::collides(Player& player) {
+    return this->appearance.getGlobalBounds().intersects(player.getAppearance()->getGlobalBounds());
+}
+
+bool Tri::collides(Player& player) {
+    return this->appearance.getGlobalBounds().intersects(player.getAppearance()->getGlobalBounds());
+}

@@ -28,6 +28,8 @@ class Arena {
 
     void render(sf::RenderWindow& target_w);
 
+    void foodConsumption(Player& player);
+
     Track* getTrack(int index);
 
 };

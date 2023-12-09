@@ -52,7 +52,8 @@ void Game::start_game() {
             Track* currentTrack = arena.getTrack(trackID);
 
             player.update(currentTrack->getCorners());
-
+            arena.foodConsumption(player);
+            
             physicsTicks.restart();
         }
 
