@@ -28,4 +28,6 @@ class Arena {
 
     void render(sf::RenderWindow& target_w);
 
+    Track* getTrack(int index);
+
 };

@@ -174,3 +174,7 @@ void Arena::render(sf::RenderWindow& target_w) {
     }
 
 }
+
+Track* Arena::getTrack(int index) {
+    return &ring[index];
+}
