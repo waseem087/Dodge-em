@@ -179,12 +179,10 @@ void Arena::render(sf::RenderWindow& target_w) {
 void Arena::foodConsumption(Player& player) {
     for (int i = 0; i < 8; i++) {
         for (int z = 0; z < 8; z++) {
-            if (foodMap[i][z] != nullptr) {
-                if (foodMap[i][z]->collides(player)) {
-                    delete foodMap[i][z];
-                    foodMap[i][z] = nullptr;
-                }
-            }
+            if (foodMap[i][z] == nullptr || !foodMap[i][z]->collides(player)) continue;
+            
+            delete foodMap[i][z];
+            foodMap[i][z] = nullptr;
         }
     }
 }
