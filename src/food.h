@@ -13,7 +13,7 @@ class FoodItem {
     sf::Vector2f getPosition();
 
     virtual sf::Shape* getAppearance() {return nullptr;};
-    virtual void render(sf::RenderWindow&, sf::Shape* appearance);
+    void render(sf::RenderWindow&, sf::Shape* appearance);
     void update(sf::Shape*);
     bool collides(Player&, sf::Shape*);
 };
