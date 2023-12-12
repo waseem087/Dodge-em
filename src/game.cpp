@@ -19,9 +19,57 @@ void Game::handleEvents(sf::Event& e, sf::RenderWindow& target_w) {
         case sf::Event::Closed:
             target_w.close();
             break;
+        case sf::Event::KeyPressed:
+            control(e.key);
+            break;
         default:
             break;
     }
+}
+
+void Game::control(const sf::Event::KeyEvent& e) {
+
+    for (int i = 0; i < 4; i++) {
+        if (player.getAppearance()->getGlobalBounds().intersects(arena.getArenaTile(i)->getGlobalBounds())) {
+            return;
+        }
+    }
+
+    switch (e.code) {
+        case sf::Keyboard::Up:
+            if (player.getDirection() == Car::Direction::Left && player.getTrackID() < 3)
+                player.setTrackID(player.getTrackID() + 1);
+            else if (player.getDirection() == Car::Direction::Right && player.getTrackID() > 0)
+                player.setTrackID(player.getTrackID() - 1);
+            break;
+
+        case sf::Keyboard::Down:
+            if (player.getDirection() == Car::Direction::Left && player.getTrackID() > 0)
+                player.setTrackID(player.getTrackID() - 1);
+            else if (player.getDirection() == Car::Direction::Right && player.getTrackID() < 3)
+                player.setTrackID(player.getTrackID() + 1);
+            break;
+
+        case sf::Keyboard::Left:
+            if (player.getDirection() == Car::Direction::Up && player.getTrackID() > 0)
+                player.setTrackID(player.getTrackID() - 1);
+            else if (player.getDirection() == Car::Direction::Down && player.getTrackID() < 3)
+                player.setTrackID(player.getTrackID() + 1);
+            break;
+
+        case sf::Keyboard::Right:
+            if (player.getDirection() == Car::Direction::Up && player.getTrackID() < 3)
+                player.setTrackID(player.getTrackID() + 1);
+            else if (player.getDirection() == Car::Direction::Down && player.getTrackID() > 0)
+                player.setTrackID(player.getTrackID() - 1);
+            break;
+
+        default:
+            break;
+    }
+
+    player.updateTrack(arena.getTrack(player.getTrackID())->getCorners());
+    
 }
 
 void Game::start_game() {
@@ -39,6 +87,9 @@ void Game::start_game() {
 
     while (gameWindow.isOpen()) {
 
+        int trackID = player.getTrackID();
+        Track* currentTrack = arena.getTrack(trackID);
+
         float timer = frameTicks.getElapsedTime().asMilliseconds();
         sf::Event e;
 
@@ -47,9 +98,6 @@ void Game::start_game() {
         }
 
         if (physicsTicks.getElapsedTime().asMilliseconds() >= 20) {
-
-            int trackID = player.getTrackID();
-            Track* currentTrack = arena.getTrack(trackID);
 
             player.update(currentTrack->getCorners());
             arena.foodConsumption(player);

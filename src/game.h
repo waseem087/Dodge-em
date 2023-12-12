@@ -18,6 +18,7 @@ class Game {
 
     void update(sf::RenderWindow& target_w);
     void handleEvents(sf::Event& e, sf::RenderWindow& target_w);
+    void control(const sf::Event::KeyEvent& e);
 
     public:
     Game();

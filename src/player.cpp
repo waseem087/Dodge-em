@@ -25,3 +25,20 @@ void Player::update(sf::Vector2f* corners) {
     move();
 
 }
+
+void Player::updateTrack(sf::Vector2f* corners) {
+    switch (current_dir) {
+        case Direction::Up:
+            appearance.setPosition(corners[0].x, appearance.getPosition().y);
+            break;
+        case Direction::Down:
+            appearance.setPosition(corners[2].x, appearance.getPosition().y);
+            break;
+        case Direction::Left:
+            appearance.setPosition(appearance.getPosition().x, corners[3].y);
+            break;
+        case Direction::Right:
+            appearance.setPosition(appearance.getPosition().x, corners[1].y);
+            break;
+    }
+}

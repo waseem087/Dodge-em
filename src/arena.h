@@ -25,11 +25,11 @@ class Arena {
     ~Arena();
 
     void initialize(sf::RenderWindow& target_w);
-
     void render(sf::RenderWindow& target_w);
-
     void foodConsumption(Player& player);
 
     Track* getTrack(int index);
+    // Track* getTracks();
+    sf::Sprite* getArenaTile(int index);
 
 };

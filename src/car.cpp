@@ -43,6 +43,14 @@ void Car::move() {
     this->appearance.move(speed * dirVector.x, speed * dirVector.y);
 }
 
+void Car::setDirection(Direction dir) {
+    current_dir = dir;
+}
+
+Car::Direction Car::getDirection() {
+    return current_dir;
+}
+
 void Car::setSpeed(float value) {
     speed = value;
 }
