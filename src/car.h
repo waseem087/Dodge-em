@@ -29,7 +29,6 @@ class Car {
     sf::Texture texture;
     sf::Sprite appearance;
     float speed = 5;
-    bool isDead = false;
     Direction current_dir;
     int trackID = 0;
 };

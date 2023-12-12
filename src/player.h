@@ -6,8 +6,13 @@
 #include "car.h"
 
 class Player : public Car {
+    private:
+    bool alive = true;
+
     public:
     Player();
     void update(sf::Vector2f*) override;
     void updateTrack(sf::Vector2f*) override;
+    bool isAlive();
+    void setAlive(bool);
 };

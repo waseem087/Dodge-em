@@ -42,3 +42,11 @@ void Player::updateTrack(sf::Vector2f* corners) {
             break;
     }
 }
+
+bool Player::isAlive() {
+    return alive;
+}
+
+void Player::setAlive(bool alive) {
+    this->alive = alive;
+}

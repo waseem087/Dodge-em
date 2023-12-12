@@ -4,6 +4,17 @@ Game::Game() {
     bg_texture.loadFromFile("../assets/img/background.jpg");
     background.setTexture(bg_texture);
     background.setScale(1.25, 1.4);
+
+    //creating 2 pointers to opponents
+    opponents = new Opponent* [2];
+    opponents[0] = new Opponent();
+    opponents[1] = nullptr;
+}
+
+Game::~Game() {
+    delete opponents[0];
+    delete opponents[1];
+    delete [] opponents;
 }
 
 void Game::update(sf::RenderWindow& target_w) {
@@ -11,6 +22,7 @@ void Game::update(sf::RenderWindow& target_w) {
     target_w.draw(background);
     this->arena.render(target_w);
     this->player.render(target_w);
+    opponents[0]->render(target_w);
     target_w.display();
 }
 
@@ -81,6 +93,10 @@ void Game::start_game() {
         gameWindow.getSize().x / 2,
         arena.getTrack(0)->corner[0].position.y
     ));
+    opponents[0]->initialize(sf::Vector2f(
+        arena.getTrack(0)->corner[0].position.x,
+        gameWindow.getSize().y / 2
+    ));
 
     sf::Clock frameTicks, physicsTicks;
     float fps = 60;
@@ -97,7 +113,21 @@ void Game::start_game() {
             handleEvents(e, gameWindow);
         }
 
-        if (physicsTicks.getElapsedTime().asMilliseconds() >= 20) {
+        if (physicsTicks.getElapsedTime().asMilliseconds() >= 20 && player.isAlive()) {
+
+            for (int i = 0; i < 2; i++) {
+                if (opponents[i] != nullptr) {
+
+                    int oppoTrackID = opponents[i]->getTrackID();
+                    Track* oppoTrack = arena.getTrack(oppoTrackID);
+
+                    opponents[i]->update(oppoTrack->getCorners());
+
+                    if (opponents[i]->kills(player))
+                        std::cout << "Player killed by opponent " << i << std::endl;
+                    
+                }
+            }
 
             player.update(currentTrack->getCorners());
             arena.foodConsumption(player);
