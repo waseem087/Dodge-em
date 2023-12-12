@@ -5,6 +5,19 @@ Game::Game() {
     background.setTexture(bg_texture);
     background.setScale(1.25, 1.4);
 
+    gameFont.loadFromFile("../assets/fonts/Nabla.ttf");
+    scoreText.setFont(gameFont);
+    scoreText.setFillColor(sf::Color::White);
+    scoreText.setCharacterSize(30);
+    scoreText.setPosition(50, 20);
+    scoreText.setString("Scores: " + std::to_string(scores));
+
+    livesText.setFont(gameFont);
+    livesText.setFillColor(sf::Color::Blue);
+    livesText.setCharacterSize(30);
+    livesText.setPosition(800, 20);
+    livesText.setString("Lives: " + std::to_string(3));
+
     //creating 2 pointers to opponents
     opponents = new Opponent* [2];
     opponents[0] = new Opponent();
@@ -23,6 +36,13 @@ void Game::update(sf::RenderWindow& target_w) {
     this->arena.render(target_w);
     this->player.render(target_w);
     opponents[0]->render(target_w);
+    
+    scoreText.setString("Scores: " + std::to_string(scores));
+    target_w.draw(scoreText);
+
+    livesText.setString("Lives: " + std::to_string(player.lives));
+    target_w.draw(livesText);
+
     target_w.display();
 }
 
@@ -137,8 +157,6 @@ void Game::start_game() {
             player.update(currentTrack->getCorners());
             arena.foodConsumption(player, scores, *opponents[0], foodPerkTicks);
             
-            std::cout << "Scores: " << scores << std::endl;
-
             physicsTicks.restart();
         }
 

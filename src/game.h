@@ -14,6 +14,8 @@ class Game {
     sf::Sprite background; // Game background sprite
     int level = 1;
     int scores = 0;
+    sf::Font gameFont;
+    sf::Text scoreText, livesText;
 
     Arena arena;
 
@@ -30,6 +32,6 @@ class Game {
     Game();
     ~Game();
     void resetPerks();
-    
+
     void start_game();
 };
