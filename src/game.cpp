@@ -84,6 +84,11 @@ void Game::control(const sf::Event::KeyEvent& e) {
     
 }
 
+void Game::resetPerks() {
+    player.setSpeed(5);
+    opponents[0]->getAppearance()->setScale(0.05, 0.05);
+}
+
 void Game::start_game() {
 
     sf::RenderWindow gameWindow(sf::VideoMode(1000, 700), TITLE);
@@ -98,7 +103,7 @@ void Game::start_game() {
         gameWindow.getSize().y / 2
     ));
 
-    sf::Clock frameTicks, physicsTicks;
+    sf::Clock frameTicks, physicsTicks, foodPerkTicks;
     float fps = 60;
 
     while (gameWindow.isOpen()) {
@@ -130,9 +135,16 @@ void Game::start_game() {
             }
 
             player.update(currentTrack->getCorners());
-            arena.foodConsumption(player);
+            arena.foodConsumption(player, scores, *opponents[0], foodPerkTicks);
             
+            std::cout << "Scores: " << scores << std::endl;
+
             physicsTicks.restart();
+        }
+
+        if(foodPerkTicks.getElapsedTime().asSeconds() >= 10) {
+            resetPerks();
+            foodPerkTicks.restart();
         }
 
         if (timer >= 1.0 / fps * 1000) {

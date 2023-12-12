@@ -175,11 +175,13 @@ void Arena::render(sf::RenderWindow& target_w) {
 
 }
 
-void Arena::foodConsumption(Player& player) {
+void Arena::foodConsumption(Player& player, int& scores, Opponent& Opponent, sf::Clock& ticks) {
     for (int i = 0; i < 8; i++) {
         for (int z = 0; z < 8; z++) {
             if (foodMap[i][z] == nullptr || !foodMap[i][z]->collides(player, foodMap[i][z]->getAppearance())) continue;
             
+            ticks.restart();
+            foodMap[i][z]->givePerk(player, scores, Opponent);
             delete foodMap[i][z];
             foodMap[i][z] = nullptr;
         }

@@ -13,7 +13,10 @@ void FoodItem::render(sf::RenderWindow& target_w, sf::Shape* appearance) {
 }
 
 bool FoodItem::collides(Player& player, sf::Shape* target) {
-    return target->getGlobalBounds().intersects(player.getAppearance()->getGlobalBounds());
+    if (target->getGlobalBounds().intersects(player.getAppearance()->getGlobalBounds())) {
+        return true;
+    }
+    return false;
 }
 
 void FoodItem::update(sf::Shape* target) {
@@ -60,4 +63,22 @@ sf::Shape* Hex::getAppearance() {
 
 sf::Shape* Tri::getAppearance() {
     return &this->appearance;
+}
+
+void Rect::givePerk(Player& player, int& score, Opponent& opponent) {
+    score += 10;
+}
+
+void Cir::givePerk(Player& player, int& score, Opponent& opponent) {
+    player.lives++;
+    score += 20;
+}
+
+void Hex::givePerk(Player& player, int& score, Opponent& opponent) {
+    player.setSpeed(5 * 1.5);
+    score += 10;
+}
+
+void Tri::givePerk(Player& player, int& score, Opponent& opponent) {
+    opponent.getAppearance()->setScale(0, 0);
 }

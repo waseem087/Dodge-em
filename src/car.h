@@ -22,6 +22,7 @@ class Car {
     void setDirection(Direction dir);
     Direction getDirection();
     void setSpeed(float value);
+    float getSpeed();
     void setTrackID(int value);
     int getTrackID();
 

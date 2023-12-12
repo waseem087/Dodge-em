@@ -3,7 +3,6 @@
 Opponent::Opponent() {
     texture.loadFromFile("../assets/img/opponent/opponent.png");
     appearance.setTexture(texture);
-    appearance.setScale(0.5, 0.5);
     current_dir = Direction::Down;
 }
 

@@ -13,6 +13,7 @@ class Game {
     sf::Texture bg_texture;
     sf::Sprite background; // Game background sprite
     int level = 1;
+    int scores = 0;
 
     Arena arena;
 
@@ -28,6 +29,7 @@ class Game {
     public:
     Game();
     ~Game();
-
+    void resetPerks();
+    
     void start_game();
 };

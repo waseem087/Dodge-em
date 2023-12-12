@@ -55,6 +55,10 @@ void Car::setSpeed(float value) {
     speed = value;
 }
 
+float Car::getSpeed() {
+    return speed;
+}
+
 void Car::setTrackID(int value) {
     trackID = value;
 }

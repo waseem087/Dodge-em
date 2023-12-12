@@ -10,6 +10,7 @@ class Player : public Car {
     bool alive = true;
 
     public:
+    int lives = 3;
     Player();
     void update(sf::Vector2f*) override;
     void updateTrack(sf::Vector2f*) override;

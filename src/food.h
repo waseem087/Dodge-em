@@ -2,6 +2,7 @@
 #include <iostream>
 
 #include "player.h"
+#include "opponent.h"
 
 class FoodItem {
     private:
@@ -16,6 +17,7 @@ class FoodItem {
     void render(sf::RenderWindow&, sf::Shape* appearance);
     void update(sf::Shape*);
     bool collides(Player&, sf::Shape*);
+    virtual void givePerk(Player&, int&, Opponent&){};
 };
 
 class Rect : public FoodItem {
@@ -25,6 +27,7 @@ class Rect : public FoodItem {
     public:
     Rect(sf::Vector2f size);
     sf::Shape* getAppearance() override;
+    void givePerk(Player&, int&, Opponent&) override;
 };
 
 class Cir : public FoodItem {
@@ -34,6 +37,7 @@ class Cir : public FoodItem {
     public:
     Cir(float radius);
     sf::Shape* getAppearance() override;
+    void givePerk(Player&, int&, Opponent&) override;
 };
 
 class Hex : public FoodItem {
@@ -43,6 +47,7 @@ class Hex : public FoodItem {
     public:
     Hex(float length);
     sf::Shape* getAppearance() override;
+    void givePerk(Player&, int&, Opponent&) override;
 };
 
 class Tri : public FoodItem {
@@ -52,4 +57,5 @@ class Tri : public FoodItem {
     public:
     Tri(float length);
     sf::Shape* getAppearance() override;
+    void givePerk(Player&, int&, Opponent&) override;
 };

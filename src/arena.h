@@ -6,6 +6,8 @@
 
 #include "track.h"
 #include "food.h"
+#include "player.h"
+#include "opponent.h"
 
 class Arena {
     private:
@@ -26,7 +28,7 @@ class Arena {
 
     void initialize(sf::RenderWindow& target_w);
     void render(sf::RenderWindow& target_w);
-    void foodConsumption(Player& player);
+    void foodConsumption(Player& player, int& scores, Opponent& Opponent, sf::Clock& ticks);
 
     Track* getTrack(int index);
     // Track* getTracks();
