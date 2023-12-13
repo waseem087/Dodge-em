@@ -278,6 +278,17 @@ void Game::initialize(sf::RenderWindow& target_w) {
     ));
 }
 
+void Game::updateDisplayValues() {
+    menu.updateLevel(level);
+    menu.updateScores(scores);
+    menu.updateLives(player.getLives());
+    menu.updateHighScores(highscores);
+
+    //overwrite if current scores are higher
+    if (scores > highscores)
+        menu.updateHighScores(scores);
+}
+
 void Game::start_game() {
 
     sf::RenderWindow gameWindow(sf::VideoMode(1000, 700), TITLE);
@@ -347,15 +358,7 @@ void Game::start_game() {
             if(arena.getFoodLeft() == 0 && level < 4)
                 updateLevel(gameWindow);
 
-            menu.updateLevel(level);
-            menu.updateScores(scores);
-            menu.updateLives(player.getLives());
-
-            menu.updateHighScores(highscores);
-
-            //overwrite if current scores are higher
-            if (scores > highscores)
-                menu.updateHighScores(scores);
+            updateDisplayValues();
 
             deltaTime += foodPerkTicks.getElapsedTime().asMilliseconds();
             if(deltaTime >= 10*1000) {

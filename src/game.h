@@ -53,6 +53,7 @@ class Game {
         void updateLevel(sf::RenderWindow& target_w);
 
         void initialize(sf::RenderWindow& target_w);
+        void updateDisplayValues();
 
     public:
         Game();
