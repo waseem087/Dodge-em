@@ -97,10 +97,8 @@ void Game::updateLevel(sf::RenderWindow& target_w) {
     arena.setFoodLeft(8 * 8);       //reset foodcount
     scores += 100;                  //increment score
     resetPerks();                   //reset perks
-    // std::cout << "Crash Check 1" << std::endl;
     arena.populateFoodMap();        //repopulate food
-    arena.initialize(target_w);     //reinitialize food
-    // std::cout << "Crash Check 2" << std::endl;
+    arena.foodDistribution();     //reinitialize food
     menu.updateLevel(level);        //update level on menu
     player.setTrackID(0);           //reset player track
     player.setDirection(Car::Direction::Right);
@@ -112,7 +110,7 @@ void Game::updateLevel(sf::RenderWindow& target_w) {
     for (int i = 0; i < 2; i++) {   //reset opponent
         if (opponents[i] != nullptr) {
             opponents[i]->setTrackID(0);
-            opponents[i]->setDirection(Car::Direction::Up);
+            opponents[i]->setDirection(Car::Direction::Down);
             opponents[i]->initialize(sf::Vector2f(
                 arena.getTrack(0)->corner[0].position.x,
                 target_w.getSize().y / 2
