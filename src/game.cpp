@@ -180,43 +180,40 @@ void Game::control(const sf::Event::KeyEvent& e) {
         }
     }
 
-    int direction = player.getDirection();
-    int track = player.getTrackID();
-
     switch (e.code) {
         case sf::Keyboard::Up:
-            if (direction == Car::Direction::Left && track < 3)
-                player.setTrackID(track + 1);
-            else if (direction == Car::Direction::Right && track > 0)
-                player.setTrackID(track - 1);
+            if (player.getDirection() == Car::Direction::Left && player.getTrackID() < 3)
+                player.setTrackID(player.getTrackID() + 1);
+            else if (player.getDirection() == Car::Direction::Right && player.getTrackID() > 0)
+                player.setTrackID(player.getTrackID() - 1);
             break;
 
         case sf::Keyboard::Down:
-            if (direction == Car::Direction::Left && track > 0)
-                player.setTrackID(track - 1);
-            else if (direction == Car::Direction::Right && track < 3)
-                player.setTrackID(track + 1);
+            if (player.getDirection() == Car::Direction::Left && player.getTrackID() > 0)
+                player.setTrackID(player.getTrackID() - 1);
+            else if (player.getDirection() == Car::Direction::Right && player.getTrackID() < 3)
+                player.setTrackID(player.getTrackID() + 1);
             break;
 
         case sf::Keyboard::Left:
-            if (direction == Car::Direction::Up && track > 0)
-                player.setTrackID(track - 1);
-            else if (direction == Car::Direction::Down && track < 3)
-                player.setTrackID(track + 1);
+            if (player.getDirection() == Car::Direction::Up && player.getTrackID() > 0)
+                player.setTrackID(player.getTrackID() - 1);
+            else if (player.getDirection() == Car::Direction::Down && player.getTrackID() < 3)
+                player.setTrackID(player.getTrackID() + 1);
             break;
 
         case sf::Keyboard::Right:
-            if (direction == Car::Direction::Up && track < 3)
-                player.setTrackID(track + 1);
-            else if (direction == Car::Direction::Down && track > 0)
-                player.setTrackID(track - 1);
+            if (player.getDirection() == Car::Direction::Up && player.getTrackID() < 3)
+                player.setTrackID(player.getTrackID() + 1);
+            else if (player.getDirection() == Car::Direction::Down && player.getTrackID() > 0)
+                player.setTrackID(player.getTrackID() - 1);
             break;
 
         default:
             break;
     }
 
-    player.updateTrack(arena.getTrack(track)->getCorners());
+    player.updateTrack(arena.getTrack(player.getTrackID())->getCorners());
     
 }
 
