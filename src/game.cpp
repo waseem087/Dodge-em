@@ -216,6 +216,8 @@ void Game::control(const sf::Event::KeyEvent& e) {
             break;
     }
 
+    track = player.getTrackID();
+
     player.updateTrack(arena.getTrack(track)->getCorners());
     
 }
