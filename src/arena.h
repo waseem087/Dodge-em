@@ -25,7 +25,6 @@ class Arena {
         void setFoodLeft(int value);
 
         Track* getTrack(int index);
-        // Track* getTracks();
         sf::Sprite* getArenaTile(int index);
 
     private:
@@ -33,11 +32,11 @@ class Arena {
         sf::Texture cornerTexture, centerTexture;
         sf::Sprite arenaTiles[5];
         sf::Vector2f spriteSize[2];     //1 for center, 1 for corner
-    
+
         sf::Vector2f cornerScale = {0.5, 0.5};
         sf::Vector2f centerScale = {0.25, 0.25};
-    
+
         Track ring[4];
-    
+
         FoodItem* foodMap[8][8];
 };

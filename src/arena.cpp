@@ -211,10 +211,6 @@ Track* Arena::getTrack(int index) {
     return &ring[index];
 }
 
-// Track* Arena::getTracks() {
-//     return ring;
-// }
-
 sf::Sprite* Arena::getArenaTile(int index) {
     return &arenaTiles[index];
 }
