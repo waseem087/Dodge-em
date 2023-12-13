@@ -268,6 +268,8 @@ void Game::start_game() {
         int trackID = player.getTrackID();
         Track* currentTrack = arena.getTrack(trackID);
 
+        bool allowTrackChange;
+
         float timer = frameTicks.getElapsedTime().asMilliseconds();
         sf::Event e;
 
@@ -284,6 +286,25 @@ void Game::start_game() {
                     Track* oppoTrack = arena.getTrack(oppoTrackID);
 
                     opponents[i]->update(oppoTrack->getCorners());
+                    
+                    bool colliding = false;
+
+                    for (int j = 0; j < 4; j++) {
+                        if (opponents[i]->getAppearance()->getGlobalBounds().intersects(arena.getArenaTile(j)->getGlobalBounds())) {
+                            colliding = true;
+                            allowTrackChange = true;
+                            break;
+                        }
+                    }
+
+                    if (!colliding && allowTrackChange) {
+                        opponents[i]->control(level);
+                        oppoTrackID = opponents[i]->getTrackID();
+                        oppoTrack = arena.getTrack(oppoTrackID);
+                        opponents[i]->updateTrack(oppoTrack->getCorners());
+                        allowTrackChange = false;
+                    }
+
 
                     if (opponents[i]->kills(player))
                         std::cout << "Player killed by opponent " << i << std::endl;

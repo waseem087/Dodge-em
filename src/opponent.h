@@ -10,4 +10,6 @@ class Opponent : public Car {
     Opponent();
     void update(sf::Vector2f*) override;
     bool kills(Player& player);
+    void control(int level);
+    void updateTrack(sf::Vector2f*);
 };
