@@ -26,6 +26,8 @@ Game::Game() {
     //close file
     fclose(scoreFile);
 
+    menu.updateHighScores(highscores);
+
 }
 
 Game::~Game() {
@@ -42,6 +44,7 @@ void Game::saveHighscores() {
     //store highscores in string
     std::string temp = std::to_string(scores);
     //write string to file
+    std::cout << "Value to be saved: " << temp << std::endl;
     fprintf(scoreFile, temp.c_str());
     //close file
     fclose(scoreFile);
@@ -72,7 +75,7 @@ void Game::update(sf::RenderWindow& target_w) {
 
         case GameState::Highscores:
             target_w.draw(mainMenuS);
-            menu.renderHighScores(target_w, highscores);
+            menu.renderHighScores(target_w);
             break;
 
         case GameState::Help:
@@ -115,6 +118,8 @@ void Game::menuControls(const sf::Event::KeyEvent& e, sf::RenderWindow& target_w
 
         case sf::Keyboard::Num4:    //exit
             prevState = state;
+            std::cout << "Current score: " << scores << std::endl;
+            std::cout << "Highscore: " << highscores << std::endl;
             if (scores > highscores)
                 saveHighscores();
             target_w.close();
@@ -346,8 +351,11 @@ void Game::start_game() {
             menu.updateScores(scores);
             menu.updateLives(player.getLives());
 
-            highscores = (scores > highscores) ? scores : highscores;
             menu.updateHighScores(highscores);
+
+            //overwrite if current scores are higher
+            if (scores > highscores)
+                menu.updateHighScores(scores);
 
             deltaTime += foodPerkTicks.getElapsedTime().asMilliseconds();
             if(deltaTime >= 10*1000) {

@@ -83,7 +83,7 @@ void Menu::renderMenu(sf::RenderWindow& target_w, bool isPaused = false) {
         target_w.draw(options[4]);
 }
 
-void Menu::renderHighScores(sf::RenderWindow& target_w, int highscores) {
+void Menu::renderHighScores(sf::RenderWindow& target_w) {
     target_w.draw(menuBackground);
     target_w.draw(highScores);
 }

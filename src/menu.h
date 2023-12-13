@@ -20,7 +20,7 @@ class Menu {
 
     void renderGUI(sf::RenderWindow& target_w);
     void renderMenu(sf::RenderWindow& target_w, bool isPaused);
-    void renderHighScores(sf::RenderWindow& target_w, int highscores);
+    void renderHighScores(sf::RenderWindow& target_w);
     void renderHelp(sf::RenderWindow& target_w);
 
 };
