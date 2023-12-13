@@ -22,6 +22,11 @@ enum GameState {
 };
 
 class Game {
+    public:
+        Game();
+        ~Game();
+        void start_game();
+
     private:
         sf::Texture bg_texture, mainMenuT;
         sf::Sprite background, mainMenuS;
@@ -54,9 +59,4 @@ class Game {
 
         void initialize(sf::RenderWindow& target_w);
         void updateDisplayValues();
-
-    public:
-        Game();
-        ~Game();
-        void start_game();
 };

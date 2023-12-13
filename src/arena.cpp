@@ -53,9 +53,11 @@ void Arena::foodDistribution() {
 
         int foodCount = 28 - (8 * i);
 
+        sf::Vector2f* corner = ring[i].getCorners();
+
         sf::Vector2f spacing = {
-            (ring[i].corner[1].position.x - ring[i].corner[0].position.x - gap) / (foodCount / 4),
-            (ring[i].corner[2].position.y - ring[i].corner[1].position.y - gap) / (foodCount / 4)
+            (corner[1].x - corner[0].x - gap) / (foodCount / 4),
+            (corner[2].y - corner[1].y - gap) / (foodCount / 4)
         };
 
         int foodPerSide = (foodCount / 4) + 1;
@@ -69,8 +71,8 @@ void Arena::foodDistribution() {
 
             while (z < foodPerSide + i) {
                 foodMap[j][z]->setPosition(sf::Vector2f(
-                    ring[i].corner[0].position.x + spacing.x * foodIndex.x + ((z > 3) ? gap : 0),
-                    ring[i].corner[0].position.y + spacing.y * foodIndex.y + ((j > 3) ? gap : 0)
+                    corner[0].x + spacing.x * foodIndex.x + ((z > 3) ? gap : 0),
+                    corner[0].y + spacing.y * foodIndex.y + ((j > 3) ? gap : 0)
                 ));
 
                 foodMap[j][z]->update(foodMap[j][z]->getAppearance());

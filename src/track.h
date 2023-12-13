@@ -4,14 +4,13 @@
 #include <iostream>
 
 class Track {
-public:
-    sf::VertexArray corner;
-    sf::Vector2f corners[4];
+    public:
+        void initialize(sf::Vector2f referenceCorner, sf::RenderWindow& target_w);
+        void render(sf::RenderWindow& target_w);
 
-    void initialize(sf::Vector2f referenceCorner, sf::RenderWindow& target_w);
-    
-    void render(sf::RenderWindow& target_w);
+        sf::Vector2f* getCorners();
 
-    sf::Vector2f* getCorners();
-
+    private:
+        sf::VertexArray corner;
+        sf::Vector2f corners[4];
 };

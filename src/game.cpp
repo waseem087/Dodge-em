@@ -236,7 +236,7 @@ void Game::resetLevel(sf::RenderWindow& target_w) {
     
     player.initialize(sf::Vector2f(             //reset player position
         target_w.getSize().x / 2,
-        arena.getTrack(0)->corner[0].position.y
+        arena.getTrack(0)->getCorners()[0].y
     ));
 
     for (int i = 0; i < 2; i++) {               //reset opponents
@@ -244,7 +244,7 @@ void Game::resetLevel(sf::RenderWindow& target_w) {
             opponents[i]->setTrackID(0);
             opponents[i]->setDirection(Car::Direction::Down);
             opponents[i]->initialize(sf::Vector2f(
-                arena.getTrack(0)->corner[0].position.x,
+                arena.getTrack(0)->getCorners()[0].x,
                 target_w.getSize().y / 2
             ));
         }
@@ -268,11 +268,11 @@ void Game::initialize(sf::RenderWindow& target_w) {
 
     player.initialize(sf::Vector2f(
         target_w.getSize().x / 2,                   //horizontal center of screen
-        arena.getTrack(0)->corner[0].position.y     //Track 0 Top
+        arena.getTrack(0)->getCorners()[0].y     //Track 0 Top
     ));
 
     opponents[0]->initialize(sf::Vector2f(
-        arena.getTrack(0)->corner[0].position.x,    //Track 0 Left
+        arena.getTrack(0)->getCorners()[0].x,    //Track 0 Left
         target_w.getSize().y / 2                    //vertical center of screen
     ));
 }

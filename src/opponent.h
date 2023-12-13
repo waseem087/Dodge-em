@@ -7,9 +7,9 @@
 
 class Opponent : public Car {
     public:
-    Opponent();
-    void update(sf::Vector2f*) override;
-    bool kills(Player& player);
-    void control(int level);
-    void updateTrack(sf::Vector2f*) override;
+        Opponent();
+        void update(sf::Vector2f*) override;
+        bool kills(Player& player);
+        void control(int level);
+        void updateTrack(sf::Vector2f*) override;
 };
