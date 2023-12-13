@@ -97,7 +97,10 @@ void Game::updateLevel(sf::RenderWindow& target_w) {
     arena.setFoodLeft(8 * 8);       //reset foodcount
     scores += 100;                  //increment score
     resetPerks();                   //reset perks
+    // std::cout << "Crash Check 1" << std::endl;
+    arena.populateFoodMap();        //repopulate food
     arena.initialize(target_w);     //reinitialize food
+    // std::cout << "Crash Check 2" << std::endl;
     menu.updateLevel(level);        //update level on menu
     player.setTrackID(0);           //reset player track
     player.setDirection(Car::Direction::Right);
@@ -167,8 +170,12 @@ void Game::start_game() {
             player.update(currentTrack->getCorners());
             arena.foodConsumption(player, scores, *opponents[0], foodPerkTicks);
             
-            if(arena.getFoodLeft() == 0 && level <= 4)
+            if(arena.getFoodLeft() == 0 && level < 4)
                 updateLevel(gameWindow);
+
+            menu.updateLevel(level);
+            menu.updateScores(scores);
+            menu.updateLives(player.lives);
 
             physicsTicks.restart();
         }

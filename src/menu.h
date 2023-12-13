@@ -1,6 +1,7 @@
 #pragma once
 
-#include "game.h"
+#include <SFML/Graphics.hpp>
+
 class Menu {
     private:
     sf::Font gameFont;

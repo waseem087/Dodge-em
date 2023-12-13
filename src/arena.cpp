@@ -13,6 +13,11 @@ Arena::Arena() {
     arenaTiles[4].setTexture(centerTexture);
     arenaTiles[4].setScale(centerScale);
 
+    populateFoodMap();
+
+}
+
+void Arena::populateFoodMap() {
     srand(time(0));
 
     for (int j = 0; j < 8; j++) {
@@ -38,7 +43,6 @@ Arena::Arena() {
             }
         }
     }
-
 }
 
 Arena::~Arena() {

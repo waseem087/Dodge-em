@@ -27,6 +27,8 @@ class Arena {
     Arena();
     ~Arena();
 
+    void populateFoodMap();
+
     void initialize(sf::RenderWindow& target_w);
     void render(sf::RenderWindow& target_w);
     void foodConsumption(Player& player, int& scores, Opponent& Opponent, sf::Clock& ticks);
