@@ -172,6 +172,11 @@ void Arena::initialize(sf::RenderWindow& target_w) {
 void Arena::render(sf::RenderWindow& target_w) {
     for (int i = 0; i < 5; i++) {
         target_w.draw(arenaTiles[i]);
+
+        if (i == 4)
+            break;
+
+        ring[i].render(target_w);
     }
 
     for (int j = 0; j < 8; j++) {

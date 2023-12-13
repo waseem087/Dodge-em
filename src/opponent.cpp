@@ -35,26 +35,32 @@ bool Opponent::kills(Player& player) {
 
 void Opponent::control(int level) {
     int dir = rand() % 4;
+    std::cout << "trackID before: " << trackID << std::endl;
+
     switch (dir) {
         case 0:     //left
+        std::cout << "Direction: Left" << std::endl;
             if (current_dir == Direction::Up && trackID < 3)
                 trackID++;
             if (current_dir == Direction::Down && trackID > 0)
                 trackID--;
             break;
         case 1:     //right
+            std::cout << "Direction: Right" << std::endl;
             if (current_dir == Direction::Up && trackID > 0)
                 trackID--;
             if (current_dir == Direction::Down && trackID < 3)
                 trackID++;
             break;
         case 2:     //up
+            std::cout << "Direction: Up" << std::endl;
             if (current_dir == Direction::Left && trackID > 0)
                 trackID--;
             if (current_dir == Direction::Right && trackID < 3)
                 trackID++;
             break;
         case 3:     //down
+            std::cout << "Direction: Down" << std::endl;
             if (current_dir == Direction::Left && trackID < 3)
                 trackID++;
             if (current_dir == Direction::Right && trackID > 0)
@@ -63,6 +69,9 @@ void Opponent::control(int level) {
         default:
             break;
     }
+
+    std::cout << "trackID after: " << trackID << std::endl;
+
 }
 
 void Opponent::updateTrack(sf::Vector2f* corners) {
