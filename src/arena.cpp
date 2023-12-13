@@ -184,8 +184,17 @@ void Arena::foodConsumption(Player& player, int& scores, Opponent& Opponent, sf:
             foodMap[i][z]->givePerk(player, scores, Opponent);
             delete foodMap[i][z];
             foodMap[i][z] = nullptr;
+            foodLeft--;
         }
     }
+}
+
+int Arena::getFoodLeft() {
+    return foodLeft;
+}
+
+void Arena::setFoodLeft(int value) {
+    foodLeft = value;
 }
 
 Track* Arena::getTrack(int index) {

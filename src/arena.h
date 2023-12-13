@@ -11,6 +11,7 @@
 
 class Arena {
     private:
+    int foodLeft = 8 * 8;
     sf::Texture cornerTexture, centerTexture;
     sf::Sprite arenaTiles[5];
     sf::Vector2f spriteSize[2];     //1 for center, 1 for corner
@@ -29,6 +30,9 @@ class Arena {
     void initialize(sf::RenderWindow& target_w);
     void render(sf::RenderWindow& target_w);
     void foodConsumption(Player& player, int& scores, Opponent& Opponent, sf::Clock& ticks);
+
+    int getFoodLeft();
+    void setFoodLeft(int value);
 
     Track* getTrack(int index);
     // Track* getTracks();

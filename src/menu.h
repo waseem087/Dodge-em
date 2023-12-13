@@ -1,31 +1,19 @@
+#pragma once
 
 #include "game.h"
 class Menu {
-public:
+    private:
+    sf::Font gameFont;
+    sf::Text scoreText, livesText, levelText;
 
-    //add menu attributes here
-    Menu()
-    {
+    public:
+    Menu();
 
-        //constructors body
-    }
+    void updateScores(int scores);
+    void updateLives(int lives);
+    void updateLevel(int level);
+    // void display_menu();
 
-    void display_menu()
-
-    {
-
-        Game g;
-        //display menu screen here
-
-        // add functionality of all the menu options here
-
-        //if Start game option is chosen 
-
-        g.start_game();
-
-
-
-    }
-
+    void renderGUI(sf::RenderWindow& target_w);
 
 };

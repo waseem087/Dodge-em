@@ -5,19 +5,6 @@ Game::Game() {
     background.setTexture(bg_texture);
     background.setScale(1.25, 1.4);
 
-    gameFont.loadFromFile("../assets/fonts/Nabla.ttf");
-    scoreText.setFont(gameFont);
-    scoreText.setFillColor(sf::Color::White);
-    scoreText.setCharacterSize(30);
-    scoreText.setPosition(50, 20);
-    scoreText.setString("Scores: " + std::to_string(scores));
-
-    livesText.setFont(gameFont);
-    livesText.setFillColor(sf::Color::Blue);
-    livesText.setCharacterSize(30);
-    livesText.setPosition(800, 20);
-    livesText.setString("Lives: " + std::to_string(3));
-
     //creating 2 pointers to opponents
     opponents = new Opponent* [2];
     opponents[0] = new Opponent();
@@ -36,12 +23,8 @@ void Game::update(sf::RenderWindow& target_w) {
     this->arena.render(target_w);
     this->player.render(target_w);
     opponents[0]->render(target_w);
-    
-    scoreText.setString("Scores: " + std::to_string(scores));
-    target_w.draw(scoreText);
 
-    livesText.setString("Lives: " + std::to_string(player.lives));
-    target_w.draw(livesText);
+    menu.renderGUI(target_w);
 
     target_w.display();
 }
@@ -109,6 +92,33 @@ void Game::resetPerks() {
     opponents[0]->getAppearance()->setScale(0.05, 0.05);
 }
 
+void Game::updateLevel(sf::RenderWindow& target_w) {
+    level++;                        //increment level
+    arena.setFoodLeft(8 * 8);       //reset foodcount
+    scores += 100;                  //increment score
+    resetPerks();                   //reset perks
+    arena.initialize(target_w);     //reinitialize food
+    menu.updateLevel(level);        //update level on menu
+    player.setTrackID(0);           //reset player track
+    player.setDirection(Car::Direction::Right);
+    player.initialize(sf::Vector2f(
+        target_w.getSize().x / 2,
+        arena.getTrack(0)->corner[0].position.y
+    ));
+
+    for (int i = 0; i < 2; i++) {   //reset opponent
+        if (opponents[i] != nullptr) {
+            opponents[i]->setTrackID(0);
+            opponents[i]->setDirection(Car::Direction::Up);
+            opponents[i]->initialize(sf::Vector2f(
+                arena.getTrack(0)->corner[0].position.x,
+                target_w.getSize().y / 2
+            ));
+        }
+    }
+
+}
+
 void Game::start_game() {
 
     sf::RenderWindow gameWindow(sf::VideoMode(1000, 700), TITLE);
@@ -157,6 +167,9 @@ void Game::start_game() {
             player.update(currentTrack->getCorners());
             arena.foodConsumption(player, scores, *opponents[0], foodPerkTicks);
             
+            if(arena.getFoodLeft() == 0 && level <= 4)
+                updateLevel(gameWindow);
+
             physicsTicks.restart();
         }
 

@@ -5,6 +5,7 @@
 #include "arena.h"
 #include "player.h"
 #include "opponent.h"
+#include "menu.h"
 
 #define TITLE "OOP-Project, Spring-2023"
 
@@ -14,10 +15,10 @@ class Game {
     sf::Sprite background; // Game background sprite
     int level = 1;
     int scores = 0;
-    sf::Font gameFont;
-    sf::Text scoreText, livesText;
 
     Arena arena;
+
+    Menu menu;
 
     Player player;
 
@@ -32,6 +33,7 @@ class Game {
     Game();
     ~Game();
     void resetPerks();
+    void updateLevel(sf::RenderWindow& target_w);
 
     void start_game();
 };
