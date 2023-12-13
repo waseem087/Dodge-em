@@ -52,9 +52,10 @@ class Game {
         void resetLevel(sf::RenderWindow& target_w);
         void updateLevel(sf::RenderWindow& target_w);
 
+        void initialize(sf::RenderWindow& target_w);
+
     public:
         Game();
         ~Game();
-    
         void start_game();
 };

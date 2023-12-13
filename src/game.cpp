@@ -1,10 +1,12 @@
 #include "game.h"
 
 Game::Game() {
+    //sets background for arena
     bg_texture.loadFromFile("../assets/img/background.jpg");
     background.setTexture(bg_texture);
     background.setScale(1.25, 1.4);
 
+    //sets background for menu
     mainMenuT.loadFromFile("../assets/img/background1.jpg");
     mainMenuS.setTexture(mainMenuT);
     mainMenuS.setScale(0.85, 0.8);
@@ -27,8 +29,10 @@ Game::Game() {
 }
 
 Game::~Game() {
+    //delete opponents
     delete opponents[0];
     delete opponents[1];
+    //delete pointer to opponents
     delete [] opponents;
 }
 
@@ -93,7 +97,7 @@ void Game::menuControls(const sf::Event::KeyEvent& e, sf::RenderWindow& target_w
             
             prevState = state;
             state = GameState::Playing;
-            player.lives = 3;
+            player.setLives(3);
             scores = 0;
             level = 1;
             resetLevel(target_w);
@@ -145,16 +149,19 @@ void Game::menuControls(const sf::Event::KeyEvent& e, sf::RenderWindow& target_w
 
 void Game::handleEvents(sf::Event& e, sf::RenderWindow& target_w) {
     switch (e.type) {
+
         case sf::Event::Closed:
             if (scores > highscores)
                 saveHighscores();
             target_w.close();
             break;
+
         case sf::Event::KeyPressed:
             menuControls(e.key, target_w);
             if (state == GameState::Playing)
                 control(e.key);
             break;
+
         default:
             break;
     }
@@ -206,25 +213,29 @@ void Game::control(const sf::Event::KeyEvent& e) {
 }
 
 void Game::resetPerks() {
+    //back to default values
     player.setSpeed(5);
+    //rescale opponent back to original from 0
     opponents[0]->getAppearance()->setScale(0.05, 0.05);
 }
 
 void Game::resetLevel(sf::RenderWindow& target_w) {
-    arena.setFoodLeft(8 * 8);       //reset foodcount
-    resetPerks();                   //reset perks
-    arena.populateFoodMap();        //repopulate food
-    arena.foodDistribution();     //reinitialize food
-    menu.updateLives(3);
-    menu.updateScores(0);
-    player.setTrackID(0);           //reset player track
-    player.setDirection(Car::Direction::Right);
-    player.initialize(sf::Vector2f(
+
+    arena.setFoodLeft(8 * 8);                   //reset foodcount
+    resetPerks();                               //reset perks
+    arena.populateFoodMap();                    //repopulate food
+    arena.foodDistribution();                   //reinitialize food
+    menu.updateLives(3);                        //reset lives text
+    menu.updateScores(0);                       //reset scores text
+    player.setTrackID(0);                       //reset player track
+    player.setDirection(Car::Direction::Right); //reset player direction
+    
+    player.initialize(sf::Vector2f(             //reset player position
         target_w.getSize().x / 2,
         arena.getTrack(0)->corner[0].position.y
     ));
 
-    for (int i = 0; i < 2; i++) {   //reset opponent
+    for (int i = 0; i < 2; i++) {               //reset opponents
         if (opponents[i] != nullptr) {
             opponents[i]->setTrackID(0);
             opponents[i]->setDirection(Car::Direction::Down);
@@ -239,37 +250,43 @@ void Game::resetLevel(sf::RenderWindow& target_w) {
 
 void Game::updateLevel(sf::RenderWindow& target_w) {
     resetLevel(target_w);
+
     level++;                        //increment level
     scores += 100;                  //increment score
     menu.updateLevel(level);        //update level on menu
-    menu.updateLives(player.lives); //update lives on menu
+    menu.updateLives(player.getLives()); //update lives on menu
     menu.updateScores(scores);      //update scores on menu
+}
+
+void Game::initialize(sf::RenderWindow& target_w) {
+
+    arena.initialize(target_w);
+
+    player.initialize(sf::Vector2f(
+        target_w.getSize().x / 2,                   //horizontal center of screen
+        arena.getTrack(0)->corner[0].position.y     //Track 0 Top
+    ));
+
+    opponents[0]->initialize(sf::Vector2f(
+        arena.getTrack(0)->corner[0].position.x,    //Track 0 Left
+        target_w.getSize().y / 2                    //vertical center of screen
+    ));
 }
 
 void Game::start_game() {
 
     sf::RenderWindow gameWindow(sf::VideoMode(1000, 700), TITLE);
 
-    this->arena.initialize(gameWindow);
-    this->player.initialize(sf::Vector2f(
-        gameWindow.getSize().x / 2,
-        arena.getTrack(0)->corner[0].position.y
-    ));
-    opponents[0]->initialize(sf::Vector2f(
-        arena.getTrack(0)->corner[0].position.x,
-        gameWindow.getSize().y / 2
-    ));
+    initialize(gameWindow);
 
     sf::Clock frameTicks, physicsTicks, foodPerkTicks;
-    float fps = 60;
+    float fps = 60;     //frames per second
+
+    int deltaTime = 0;
 
     while (gameWindow.isOpen()) {
 
-        int trackID = player.getTrackID();
-        Track* currentTrack = arena.getTrack(trackID);
-
         bool allowTrackChange;
-
         float timer = frameTicks.getElapsedTime().asMilliseconds();
         sf::Event e;
 
@@ -277,7 +294,11 @@ void Game::start_game() {
             handleEvents(e, gameWindow);
         }
 
-        if (physicsTicks.getElapsedTime().asMilliseconds() >= 20 && player.isAlive() && state == GameState::Playing) {
+        if (
+            physicsTicks.getElapsedTime().asMilliseconds() >= 20 && 
+            player.isAlive() && 
+            state == GameState::Playing
+        ) {
 
             for (int i = 0; i < 2; i++) {
                 if (opponents[i] != nullptr) {
@@ -312,6 +333,9 @@ void Game::start_game() {
                 }
             }
 
+            int trackID = player.getTrackID();
+            Track* currentTrack = arena.getTrack(trackID);
+
             player.update(currentTrack->getCorners());
             arena.foodConsumption(player, scores, *opponents[0], foodPerkTicks);
             
@@ -320,17 +344,19 @@ void Game::start_game() {
 
             menu.updateLevel(level);
             menu.updateScores(scores);
-            menu.updateLives(player.lives);
+            menu.updateLives(player.getLives());
 
             highscores = (scores > highscores) ? scores : highscores;
             menu.updateHighScores(highscores);
 
-            physicsTicks.restart();
-        }
+            deltaTime += foodPerkTicks.getElapsedTime().asMilliseconds();
+            if(deltaTime >= 10*1000) {
+                deltaTime = 0;
+                resetPerks();
+            }
 
-        if(foodPerkTicks.getElapsedTime().asSeconds() >= 10 && state == GameState::Playing) {
-            resetPerks();
             foodPerkTicks.restart();
+            physicsTicks.restart();
         }
 
         if (timer >= 1.0 / fps * 1000) {

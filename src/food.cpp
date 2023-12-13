@@ -70,7 +70,7 @@ void Rect::givePerk(Player& player, int& score, Opponent& opponent) {
 }
 
 void Cir::givePerk(Player& player, int& score, Opponent& opponent) {
-    player.lives++;
+    player.setLives(player.getLives() + 1);
     score += 20;
 }
 

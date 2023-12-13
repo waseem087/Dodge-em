@@ -50,3 +50,11 @@ bool Player::isAlive() {
 void Player::setAlive(bool alive) {
     this->alive = alive;
 }
+
+int Player::getLives() {
+    return lives;
+}
+
+void Player::setLives(int lives) {
+    this->lives = lives;
+}
