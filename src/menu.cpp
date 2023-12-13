@@ -20,6 +20,17 @@ Menu::Menu() {
     levelText.setPosition(400, 20);
     levelText.setString("Level: " + std::to_string(1));
 
+    highScores.setFont(gameFont);
+    highScores.setFillColor(sf::Color::White);
+    highScores.setCharacterSize(70);
+    highScores.setPosition(400, 350);
+    highScores.setString("Highscores: " + std::to_string(0));
+
+    helpText.setFont(gameFont);
+    helpText.setFillColor(sf::Color::White);
+    helpText.setCharacterSize(30);
+    helpText.setPosition(50, 20);
+
     for (int i = 0; i < 5; i++) {
         options[i].setFont(gameFont);
         options[i].setFillColor(sf::Color::Green);
@@ -36,6 +47,8 @@ Menu::Menu() {
     menuBackground.setSize(sf::Vector2f(1000, 700));
     menuBackground.setFillColor(sf::Color(0, 0, 0, 200));
     menuBackground.setPosition(0, 0);
+
+    helpText.setString("Testing Help");
 }
 
 void Menu::updateScores(int scores) {
@@ -48,6 +61,10 @@ void Menu::updateLives(int lives) {
 
 void Menu::updateLevel(int level) {
     levelText.setString("Level: " + std::to_string(level));
+}
+
+void Menu::updateHighScores(int scores) {
+    highScores.setString("Highscores: " + std::to_string(scores));
 }
 
 void Menu::renderGUI(sf::RenderWindow& target_w) {
@@ -64,4 +81,14 @@ void Menu::renderMenu(sf::RenderWindow& target_w, bool isPaused = false) {
 
     if(isPaused)
         target_w.draw(options[4]);
+}
+
+void Menu::renderHighScores(sf::RenderWindow& target_w, int highscores) {
+    target_w.draw(menuBackground);
+    target_w.draw(highScores);
+}
+
+void Menu::renderHelp(sf::RenderWindow& target_w) {
+    target_w.draw(menuBackground);
+    target_w.draw(helpText);
 }

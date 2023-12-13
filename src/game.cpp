@@ -13,6 +13,17 @@ Game::Game() {
     opponents = new Opponent* [2];
     opponents[0] = new Opponent();
     opponents[1] = nullptr;
+
+    //open file
+    scoreFile = fopen("../assets/highscores.txt", "r");
+    char temp[10];
+    //store highscores in string
+    fgets(temp, 10, scoreFile);
+    //convert string to int and store in highscores
+    highscores = std::stoi(temp);
+    //close file
+    fclose(scoreFile);
+
 }
 
 Game::~Game() {
@@ -21,8 +32,25 @@ Game::~Game() {
     delete [] opponents;
 }
 
+void Game::saveHighscores() {
+    //open file
+    scoreFile = fopen("../assets/highscores.txt", "w");
+    //store highscores in string
+    std::string temp = std::to_string(scores);
+    //write string to file
+    fprintf(scoreFile, temp.c_str());
+    //close file
+    fclose(scoreFile);
+}
+
 void Game::update(sf::RenderWindow& target_w) {
     target_w.clear(sf::Color::Black);
+
+    target_w.draw(background);
+    arena.render(target_w);
+    player.render(target_w);
+    opponents[0]->render(target_w);
+    menu.renderGUI(target_w);
 
     switch(state) {
 
@@ -32,58 +60,94 @@ void Game::update(sf::RenderWindow& target_w) {
             break;
 
         case GameState::Playing:
-            target_w.draw(background);
-            arena.render(target_w);
-            player.render(target_w);
-            opponents[0]->render(target_w);
-            menu.renderGUI(target_w);
             break;
 
         case GameState::Paused:
-            target_w.draw(background);
-            arena.render(target_w);
-            player.render(target_w);
-            opponents[0]->render(target_w);
-            menu.renderGUI(target_w);
             menu.renderMenu(target_w, true);
             break;
-    }
 
+        case GameState::Highscores:
+            target_w.draw(mainMenuS);
+            menu.renderHighScores(target_w, highscores);
+            break;
+
+        case GameState::Help:
+            target_w.draw(mainMenuS);
+            menu.renderHelp(target_w);
+            break;
+    }
 
     target_w.display();
 }
 
 void Game::menuControls(const sf::Event::KeyEvent& e, sf::RenderWindow& target_w) {
+
+    std::cout << "Current State: " << state << std::endl;
+    std::cout << "Previous State: " << prevState << std::endl;
+
     switch (e.code) {
+
         case sf::Keyboard::Num1:    //start game
+            if (!(state == GameState::Paused || state == GameState::MainMenu))
+                break;
+            
+            prevState = state;
             state = GameState::Playing;
             player.lives = 3;
             scores = 0;
             level = 1;
             resetLevel(target_w);
             break;
+
         case sf::Keyboard::Num2:    //highscores
+            prevState = state;
+            state = GameState::Highscores;
             break;
+
         case sf::Keyboard::Num3:    //help
+            prevState = state;
+            state = GameState::Help;
             break;
+
         case sf::Keyboard::Num4:    //exit
+            prevState = state;
+            if (scores > highscores)
+                saveHighscores();
             target_w.close();
             break;
+
         case sf::Keyboard::Num5:    //continue
+            prevState = state;
             state = GameState::Playing;
             break;
+
         case sf::Keyboard::P:  //pause
+            prevState = state;
             if (state == GameState::Playing)
                 state = GameState::Paused;
             break;
+
+        case sf::Keyboard::Escape:  //escape
+            if(state == GameState::Highscores || state == GameState::Help){
+                if((prevState == GameState::Paused))
+                    state = GameState::Playing;
+                else
+                    state = GameState::MainMenu;
+            }
+            prevState = state;
+            break;
+            
         default:
             break;
     }
+
 }
 
 void Game::handleEvents(sf::Event& e, sf::RenderWindow& target_w) {
     switch (e.type) {
         case sf::Event::Closed:
+            if (scores > highscores)
+                saveHighscores();
             target_w.close();
             break;
         case sf::Event::KeyPressed:
@@ -236,6 +300,9 @@ void Game::start_game() {
             menu.updateLevel(level);
             menu.updateScores(scores);
             menu.updateLives(player.lives);
+
+            highscores = (scores > highscores) ? scores : highscores;
+            menu.updateHighScores(highscores);
 
             physicsTicks.restart();
         }

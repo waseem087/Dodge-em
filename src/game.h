@@ -3,6 +3,8 @@
 #include <SFML/Graphics.hpp>
 #include <time.h>
 #include <iostream>
+#include <fstream>
+#include <string>
 
 #include "arena.h"
 #include "player.h"
@@ -15,7 +17,9 @@ enum GameState {
     MainMenu,
     Playing,
     Paused,
-    GameOver
+    GameOver,
+    Help,
+    Highscores
 };
 
 class Game {
@@ -24,9 +28,12 @@ class Game {
     sf::Sprite background, mainMenuS; // Game background sprite
     int level = 1;
     int scores = 0;
+    FILE* scoreFile;
+    int highscores = 0;
 
     GameState state = GameState::MainMenu;
-
+    GameState prevState = GameState::MainMenu;
+    
     Arena arena;
 
     Menu menu;
@@ -40,6 +47,7 @@ class Game {
     void handleEvents(sf::Event& e, sf::RenderWindow& target_w);
     void control(const sf::Event::KeyEvent& e);
     void menuControls(const sf::Event::KeyEvent& e, sf::RenderWindow& target_w);
+    void saveHighscores();
 
     public:
     Game();
