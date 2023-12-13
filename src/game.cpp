@@ -53,6 +53,7 @@ void Game::saveHighscores() {
 void Game::update(sf::RenderWindow& target_w) {
     target_w.clear(sf::Color::Black);
 
+    //level is drawn below, rest of the things are drawn at top as necessary
     target_w.draw(background);
     arena.render(target_w);
     player.render(target_w);
@@ -89,9 +90,6 @@ void Game::update(sf::RenderWindow& target_w) {
 
 void Game::menuControls(const sf::Event::KeyEvent& e, sf::RenderWindow& target_w) {
 
-    std::cout << "Current State: " << state << std::endl;
-    std::cout << "Previous State: " << prevState << std::endl;
-
     switch (e.code) {
 
         case sf::Keyboard::Num1:    //start game
@@ -100,8 +98,6 @@ void Game::menuControls(const sf::Event::KeyEvent& e, sf::RenderWindow& target_w
             
             prevState = state;
             state = GameState::Playing;
-            player.setLives(3);
-            scores = 0;
             level = 1;
             resetLevel(target_w);
             break;
@@ -118,8 +114,6 @@ void Game::menuControls(const sf::Event::KeyEvent& e, sf::RenderWindow& target_w
 
         case sf::Keyboard::Num4:    //exit
             prevState = state;
-            std::cout << "Current score: " << scores << std::endl;
-            std::cout << "Highscore: " << highscores << std::endl;
             if (scores > highscores)
                 saveHighscores();
             target_w.close();
@@ -152,7 +146,7 @@ void Game::menuControls(const sf::Event::KeyEvent& e, sf::RenderWindow& target_w
 
 }
 
-void Game::handleEvents(sf::Event& e, sf::RenderWindow& target_w) {
+void Game::handleEvents(const sf::Event& e, sf::RenderWindow& target_w) {
     switch (e.type) {
 
         case sf::Event::Closed:

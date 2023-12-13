@@ -43,7 +43,7 @@ class Game {
 
         //rendering
         void update(sf::RenderWindow& target_w);
-        void handleEvents(sf::Event& e, sf::RenderWindow& target_w);
+        void handleEvents(const sf::Event& e, sf::RenderWindow& target_w);
         //controls player
         void control(const sf::Event::KeyEvent& e);
         void menuControls(const sf::Event::KeyEvent& e, sf::RenderWindow& target_w);
