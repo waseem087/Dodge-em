@@ -1,7 +1,6 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
-#include <time.h>
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -24,37 +23,38 @@ enum GameState {
 
 class Game {
     private:
-    sf::Texture bg_texture, mainMenuT;
-    sf::Sprite background, mainMenuS; // Game background sprite
-    int level = 1;
-    int scores = 0;
-    FILE* scoreFile;
-    int highscores = 0;
+        sf::Texture bg_texture, mainMenuT;
+        sf::Sprite background, mainMenuS;
 
-    GameState state = GameState::MainMenu;
-    GameState prevState = GameState::MainMenu;
-    
-    Arena arena;
+        int level = 1;
+        int scores = 0;
+        int highscores = 0;
 
-    Menu menu;
+        FILE* scoreFile;
 
-    Player player;
+        GameState state = GameState::MainMenu;
+        GameState prevState = GameState::MainMenu;
 
-    //since there can be 2 opponents
-    Opponent** opponents;
+        Arena arena;
+        Menu menu;
+        Player player;
+        //since there can be 2 opponents, we can use 1 pointer to point towards both of em
+        Opponent** opponents;
 
-    void update(sf::RenderWindow& target_w);
-    void handleEvents(sf::Event& e, sf::RenderWindow& target_w);
-    void control(const sf::Event::KeyEvent& e);
-    void menuControls(const sf::Event::KeyEvent& e, sf::RenderWindow& target_w);
-    void saveHighscores();
+        //rendering
+        void update(sf::RenderWindow& target_w);
+        void handleEvents(sf::Event& e, sf::RenderWindow& target_w);
+        //controls player
+        void control(const sf::Event::KeyEvent& e);
+        void menuControls(const sf::Event::KeyEvent& e, sf::RenderWindow& target_w);
+        void saveHighscores();
+        void resetPerks();
+        void resetLevel(sf::RenderWindow& target_w);
+        void updateLevel(sf::RenderWindow& target_w);
 
     public:
-    Game();
-    ~Game();
-    void resetPerks();
-    void resetLevel(sf::RenderWindow& target_w);
-    void updateLevel(sf::RenderWindow& target_w);
-
-    void start_game();
+        Game();
+        ~Game();
+    
+        void start_game();
 };
