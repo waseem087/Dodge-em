@@ -1,4 +1,8 @@
 # Installation
+## Prerequisites:
+- cmake
+- C++ compiler
+  
 You can clone the project using command
 ```
 git clone https://github.com/waseem087/Dodge-em.git
