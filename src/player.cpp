@@ -12,14 +12,22 @@ void Player::update(sf::Vector2f* corners) {
 
     //clockwise
     //change direction
-    if (current_dir == Direction::Right && appearance.getPosition().x >= corners[1].x - errorDistance)
+    if (current_dir == Direction::Right && appearance.getPosition().x >= corners[1].x - errorDistance) {
+        appearance.setRotation(90);
         current_dir = Direction::Down;
-    if (current_dir == Direction::Down && appearance.getPosition().y >= corners[2].y - errorDistance)
+    }
+    if (current_dir == Direction::Down && appearance.getPosition().y >= corners[2].y - errorDistance) {
+        appearance.setRotation(180);
         current_dir = Direction::Left;
-    if (current_dir == Direction::Left && appearance.getPosition().x <= corners[3].x + errorDistance)
+    }
+    if (current_dir == Direction::Left && appearance.getPosition().x <= corners[3].x + errorDistance) {
+        appearance.setRotation(270);
         current_dir = Direction::Up;
-    if (current_dir == Direction::Up && appearance.getPosition().y <= corners[0].y + errorDistance)
+    }
+    if (current_dir == Direction::Up && appearance.getPosition().y <= corners[0].y + errorDistance) {
+        appearance.setRotation(0);
         current_dir = Direction::Right;
+    }
 
     move();
 
