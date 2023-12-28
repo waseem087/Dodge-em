@@ -101,3 +101,14 @@ class Arena {
 };
 ```
 Now let's explain all components one by one. First, we will talk about the `private` attributes.
+```cpp
+int foodLeft = 8 * 8;
+```
+As the name suggests, `foodLeft` keeps track of how many food items are remaining currently.
+
+```cpp
+sf::Texture cornerTexture, centerTexture;
+sf::Sprite arenaTiles[5];
+```
+As there are five tiles in the whole arena where 4 of them are exactly the same, but are just flipped. So the there is `cornerTexture` for them and `centerTexture` for the tile in the middle.
+
