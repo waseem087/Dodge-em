@@ -112,3 +112,8 @@ sf::Sprite arenaTiles[5];
 ```
 As there are five tiles in the whole arena where 4 of them are exactly the same, but are just flipped. So the there is `cornerTexture` for them and `centerTexture` for the tile in the middle.
 
+```cpp
+sf::Vector2f spriteSize[2];
+```
+The first size, `spriteSize[0]` is used for corners. Meanwhile, the other one, `spriteSize[1]` is used for the center tile.
+
