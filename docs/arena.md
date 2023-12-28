@@ -473,7 +473,11 @@ All of that combined looks something like this.
 void Arena::foodConsumption(Player& player, int& scores, Opponent& Opponent, sf::Clock& ticks) {
     for (int i = 0; i < 8; i++) {
         for (int z = 0; z < 8; z++) {
-            if (foodMap[i][z] == nullptr || !foodMap[i][z]->collides(player, foodMap[i][z]->getAppearance())) continue;
+            if (
+                foodMap[i][z] == nullptr || 
+                !foodMap[i][z]->collides(player, foodMap[i][z]->getAppearance())
+            ) 
+                continue;
             
             ticks.restart();
 
@@ -481,6 +485,115 @@ void Arena::foodConsumption(Player& player, int& scores, Opponent& Opponent, sf:
             delete foodMap[i][z];
             foodMap[i][z] = nullptr;
             foodLeft--;
+        }
+    }
+}
+```
+
+### foodDistribution
+We will distribute the food by iterating over the `tracks`.
+```cpp
+for (int i = 0; i < 4; i++) {
+
+}
+```
+Figure out how much food is in each `track` according to `track` number (indicated by `i`).
+```cpp
+int foodCount = 28 - (8 * i);
+```
+Get corner coordinates of current `track`.
+```cpp
+sf::Vector2f* corner = ring[i].getCorners();
+```
+Figuring out spacing between each foodItem.
+```cpp
+sf::Vector2f spacing = {
+    (corner[1].x - corner[0].x - gap) / (foodCount / 4),
+    (corner[2].y - corner[1].y - gap) / (foodCount / 4)
+};
+```
+We can use a `vector` to keep track of which foodItem is being distributed.
+```cpp
+sf::Vector2i foodIndex = {0, 0};
+```
+Then we can iterate over the height of the current `track`. Starting of the loop is same as `i` which acts as starting offset inside the `foodMap` array. Same offset will also have to be added to the number of foodItems in that length (tracked by `foodPerSide`).
+```cpp
+for (int j = i; j < foodPerSide + i; j++) {
+    int z = i;
+
+    //distribution loop goes here
+
+    foodIndex.x = 0;    //reset column position
+    foodIndex.y++;      //increase row position
+}
+```
+Since the array is in shape of a _square_ so we can use `z` as index for columns, set equal to `i`, the offset and it works because of the symmetric property of _squares_.  
+The loop which actually updates the positions, look something like:
+```cpp
+while (z < foodPerSide + i) {
+    foodMap[j][z]->setPosition(sf::Vector2f(
+        corner[0].x + spacing.x * foodIndex.x + ((z > 3) ? gap : 0),
+        corner[0].y + spacing.y * foodIndex.y + ((j > 3) ? gap : 0)
+    ));
+
+    foodMap[j][z]->update(foodMap[j][z]->getAppearance());
+
+    if ((j == i || j == foodPerSide - 1 + i)){
+        foodIndex.x++;
+        z++;
+    }
+    else {
+        foodIndex.x += foodPerSide - 1;
+        z += foodPerSide - 1;
+    }
+}
+```
+The whole function looks something like:
+```cpp
+void Arena::foodDistribution() {
+
+    int gap = 150;
+
+    for (int i = 0; i < 4; i++) {
+
+        int foodCount = 28 - (8 * i);
+
+        sf::Vector2f* corner = ring[i].getCorners();
+
+        sf::Vector2f spacing = {
+            (corner[1].x - corner[0].x - gap) / (foodCount / 4),
+            (corner[2].y - corner[1].y - gap) / (foodCount / 4)
+        };
+
+        int foodPerSide = (foodCount / 4) + 1;
+
+        sf::Vector2i foodIndex = {0, 0};
+
+        //food distribution
+        for (int j = i; j < foodPerSide + i; j++) {
+            
+            int z = i;
+
+            while (z < foodPerSide + i) {
+                foodMap[j][z]->setPosition(sf::Vector2f(
+                    corner[0].x + spacing.x * foodIndex.x + ((z > 3) ? gap : 0),
+                    corner[0].y + spacing.y * foodIndex.y + ((j > 3) ? gap : 0)
+                ));
+
+                foodMap[j][z]->update(foodMap[j][z]->getAppearance());
+
+                if ((j == i || j == foodPerSide - 1 + i)){
+                    foodIndex.x++;
+                    z++;
+                }
+                else {
+                    foodIndex.x += foodPerSide - 1;
+                    z += foodPerSide - 1;
+                }
+            }
+
+            foodIndex.x = 0;
+            foodIndex.y++;
         }
     }
 }
