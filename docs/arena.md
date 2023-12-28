@@ -117,3 +117,9 @@ sf::Vector2f spriteSize[2];
 ```
 The first size, `spriteSize[0]` is used for corners. Meanwhile, the other one, `spriteSize[1]` is used for the center tile.
 
+```cpp
+sf::Vector2f cornerScale = {0.5, 0.5};
+sf::Vector2f centerScale = {0.25, 0.25};
+```
+As the name suggests, these are `scalar vectors` used for only resizing purposes.
+
