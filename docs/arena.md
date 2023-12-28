@@ -65,3 +65,38 @@ FoodItem* foodMap[8][8] = {0};
 ```
 The constructor will iterate over this `map` and create `rand()` based food object and the address of it is stored in the grid.
 Then this grid can be utilized inside `foodEaten(Player&)` function.
+
+### Prototype:
+```cpp
+class Arena {
+    public:
+        Arena();
+        ~Arena();
+
+        void populateFoodMap();
+
+        void initialize(sf::RenderWindow& target_w);
+        void render(sf::RenderWindow& target_w);
+        void foodConsumption(Player& player, int& scores, Opponent& Opponent, sf::Clock& ticks);
+        void foodDistribution();
+
+        int getFoodLeft();
+        void setFoodLeft(int value);
+
+        Track* getTrack(int index);
+        sf::Sprite* getArenaTile(int index);
+
+    private:
+        int foodLeft = 8 * 8;
+        sf::Texture cornerTexture, centerTexture;
+        sf::Sprite arenaTiles[5];
+        sf::Vector2f spriteSize[2];
+
+        sf::Vector2f cornerScale = {0.5, 0.5};
+        sf::Vector2f centerScale = {0.25, 0.25};
+
+        Track ring[4];
+
+        FoodItem* foodMap[8][8];
+};
+```
