@@ -441,3 +441,47 @@ void Arena::render(sf::RenderWindow& target_w) {
     }
 }
 ```
+
+### foodConsumption
+We will interate through the entire `foodMap`.
+```cpp
+for (int i = 0; i < 8; i++) {
+    for (int z = 0; z < 8; z++) {
+
+    }
+}
+```
+Check if the `player` collides with the current foodItem being checked.
+```cpp
+if (
+    foodMap[i][z] == nullptr || 
+    !foodMap[i][z]->collides(player, foodMap[i][z]->getAppearance())
+)
+    continue;
+```
+Otherwise, reset the `clock`, give `player` the perks, delete that foodItem, set its pointer to `nullptr` and decrease the foodLeft count.
+
+```cpp
+ticks.restart();
+foodMap[i][z]->givePerk(player, scores, Opponent);
+delete foodMap[i][z];
+foodMap[i][z] = nullptr;
+foodLeft--;
+```
+All of that combined looks something like this.
+```cpp
+void Arena::foodConsumption(Player& player, int& scores, Opponent& Opponent, sf::Clock& ticks) {
+    for (int i = 0; i < 8; i++) {
+        for (int z = 0; z < 8; z++) {
+            if (foodMap[i][z] == nullptr || !foodMap[i][z]->collides(player, foodMap[i][z]->getAppearance())) continue;
+            
+            ticks.restart();
+
+            foodMap[i][z]->givePerk(player, scores, Opponent);
+            delete foodMap[i][z];
+            foodMap[i][z] = nullptr;
+            foodLeft--;
+        }
+    }
+}
+```
