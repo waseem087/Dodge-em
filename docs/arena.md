@@ -123,3 +123,8 @@ sf::Vector2f centerScale = {0.25, 0.25};
 ```
 As the name suggests, these are `scalar vectors` used for only resizing purposes.
 
+```cpp
+Track ring[4];
+```
+The four `tracks` on which player and opponent move.
+
