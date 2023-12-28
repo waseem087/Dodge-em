@@ -409,3 +409,35 @@ void Arena::initialize(sf::RenderWindow& target_w) {
 
 }
 ```
+
+### render
+We can `render` the five tiles.
+```cpp
+for (int i = 0; i < 5; i++) {
+    target_w.draw(arenaTiles[i]);
+}
+```
+and the foodItems themselves.
+```cpp
+for (int j = 0; j < 8; j++) {
+    for (int z = 0; z < 8; z++) {
+        if (foodMap[j][z] != nullptr)
+            foodMap[j][z]->render(target_w, foodMap[j][z]->getAppearance());
+    }
+}
+```
+That is what the `render` function does.
+```cpp
+void Arena::render(sf::RenderWindow& target_w) {
+    for (int i = 0; i < 5; i++) {
+        target_w.draw(arenaTiles[i]);
+    }
+
+    for (int j = 0; j < 8; j++) {
+        for (int z = 0; z < 8; z++) {
+            if (foodMap[j][z] != nullptr)
+                foodMap[j][z]->render(target_w, foodMap[j][z]->getAppearance());
+        }
+    }
+}
+```
