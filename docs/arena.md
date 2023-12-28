@@ -188,3 +188,15 @@ Arena::Arena() {
 
 }
 ```
+
+### Destructor
+The `destructor` just frees up the memory allocated for the `foodMap`.
+```cpp
+Arena::~Arena() {
+    for (int j = 0; j < 8; j++) {
+        for (int z = 0; z < 8; z++) {
+            delete foodMap[j][z];
+        }
+    }
+}
+```
