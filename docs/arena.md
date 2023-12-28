@@ -128,3 +128,22 @@ Track ring[4];
 ```
 The four `tracks` on which player and opponent move.
 
+Now let's explain the interface, the `public` functions. But first, let's get the `getter` and `setter` functions out of the way.
+```cpp
+int Arena::getFoodLeft() {
+    return foodLeft;
+}
+
+void Arena::setFoodLeft(int value) {
+    foodLeft = value;
+}
+
+Track* Arena::getTrack(int index) {
+    return &ring[index];
+}
+
+sf::Sprite* Arena::getArenaTile(int index) {
+    return &arenaTiles[index];
+}
+```
+
