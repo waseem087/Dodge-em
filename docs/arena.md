@@ -147,3 +147,44 @@ sf::Sprite* Arena::getArenaTile(int index) {
 }
 ```
 
+Let's continue our discussion with the rest of the interfaces of the class.
+
+### Constructor
+The constructor loads the texture images.
+```cpp
+cornerTexture.loadFromFile("../assets/img/arena/arenaTileCorner.png");
+centerTexture.loadFromFile("../assets/img/arena/arenaTileCenter.png");
+```
+Sets them to the sprite, which are scaled.
+```cpp
+for (int i = 0; i < 4; i++) {
+    arenaTiles[i].setTexture(cornerTexture);
+    arenaTiles[i].setScale(cornerScale);
+}
+
+arenaTiles[4].setTexture(centerTexture);
+arenaTiles[4].setScale(centerScale);
+```
+And then lastly, calls `populateFoodMap()` to spawn fooditems throughout the whole arena.
+```cpp
+populateFoodMap();
+```
+The whole constructor looks like this:
+```cpp
+Arena::Arena() {
+
+    cornerTexture.loadFromFile("../assets/img/arena/arenaTileCorner.png");
+    centerTexture.loadFromFile("../assets/img/arena/arenaTileCenter.png");
+
+    for (int i = 0; i < 4; i++) {
+        arenaTiles[i].setTexture(cornerTexture);
+        arenaTiles[i].setScale(cornerScale);
+    }
+
+    arenaTiles[4].setTexture(centerTexture);
+    arenaTiles[4].setScale(centerScale);
+
+    populateFoodMap();
+
+}
+```
