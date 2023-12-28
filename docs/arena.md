@@ -100,3 +100,4 @@ class Arena {
         FoodItem* foodMap[8][8];
 };
 ```
+Now let's explain all components one by one. First, we will talk about the `private` attributes.
