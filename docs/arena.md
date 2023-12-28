@@ -200,3 +200,68 @@ Arena::~Arena() {
     }
 }
 ```
+
+### populateFoodMap
+This function uses `srand()` to set the seed for random number generator.
+```cpp
+srand(time(0));
+```
+then we loop over the grid.
+```cpp
+for (int j = 0; j < 8; j++) {
+    for (int z = 0; z < 8; z++) {
+
+    }
+}
+```
+Use a `switch` to check random number from `0` to `3` and generate food accordinly.
+```cpp
+int magicNum = rand() % 4;
+            
+switch (magicNum) {
+    case 0:
+        foodMap[j][z] = new Rect(sf::Vector2f(40, 20));
+        break;
+    case 1:
+        foodMap[j][z] = new Cir(10);
+        break;
+    case 2:
+        foodMap[j][z] = new Hex(10);
+        break;
+    case 3:
+        foodMap[j][z] = new Tri(10);
+        break;
+    default:
+        break;
+}
+```
+The whole function looks like this:
+```cpp
+void Arena::populateFoodMap() {
+    srand(time(0));
+
+    for (int j = 0; j < 8; j++) {
+        for (int z = 0; z < 8; z++) {
+
+            int magicNum = rand() % 4;
+            
+            switch (magicNum) {
+                case 0:
+                    foodMap[j][z] = new Rect(sf::Vector2f(40, 20));
+                    break;
+                case 1:
+                    foodMap[j][z] = new Cir(10);
+                    break;
+                case 2:
+                    foodMap[j][z] = new Hex(10);
+                    break;
+                case 3:
+                    foodMap[j][z] = new Tri(10);
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+}
+```

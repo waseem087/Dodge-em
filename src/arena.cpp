@@ -26,20 +26,20 @@ void Arena::populateFoodMap() {
             int magicNum = rand() % 4;
             
             switch (magicNum) {
-            case 0:
-                foodMap[j][z] = new Rect(sf::Vector2f(40, 20));
-                break;
-            case 1:
-                foodMap[j][z] = new Cir(10);
-                break;
-            case 2:
-                foodMap[j][z] = new Hex(10);
-                break;
-            case 3:
-                foodMap[j][z] = new Tri(10);
-                break;
-            default:
-                break;
+                case 0:
+                    foodMap[j][z] = new Rect(sf::Vector2f(40, 20));
+                    break;
+                case 1:
+                    foodMap[j][z] = new Cir(10);
+                    break;
+                case 2:
+                    foodMap[j][z] = new Hex(10);
+                    break;
+                case 3:
+                    foodMap[j][z] = new Tri(10);
+                    break;
+                default:
+                    break;
             }
         }
     }
