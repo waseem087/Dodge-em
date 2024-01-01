@@ -50,22 +50,6 @@ struct track {
 ```
 They will be set by `Arena constructor` based on the dimensions of it. 
 
-### Food
-The `Arena` will also contain [food](./food.md) items. 
-They are tracked by a 2-dimensional array called `foodMap`.  
-If we look at <a href="#fig_1.1">Fig 1.1</a>, we can think of the `tracks` as `rings` where `ring 0` represents the inner most `track`. 
-Let `ring number` be represented by `r` then for each `ring`, number of `food` items is: 
-$$\left( 4 + 8r \right)$$
-
-The total amount of food on the map is represented by equation:
-$$\sum_{r = 0}^3 \left(4 + 8r\right)$$
-Since the `foodMap` is in shape of a `square`, the dimensions are `m*m` where `m` is the `sqrt` of this result. 
-```cpp
-FoodItem* foodMap[8][8] = {0};
-```
-The constructor will iterate over this `map` and create `rand()` based food object and the address of it is stored in the grid.
-Then this grid can be utilized inside `foodEaten(Player&)` function.
-
 ### Prototype:
 ```cpp
 class Arena {
@@ -127,6 +111,30 @@ As the name suggests, these are `scalar vectors` used for only resizing purposes
 Track ring[4];
 ```
 The four `tracks` on which player and opponent move.
+
+```cpp
+FoodItem* foodMap[8][8];
+```
+
+The `Arena` will also contain [food](./food.md) items. 
+They are tracked by a 2-dimensional array called `foodMap`.  
+If we look at <a href="#fig_1.1">Fig 1.1</a>, we can think of the `tracks` as `rings` where `ring 0` represents the inner most `track`. 
+Let `ring number` be represented by `r` then for each `ring`, number of `food` items is: 
+$$\left( 4 + 8r \right)$$
+
+The total amount of food on the map is represented by equation:
+$$\sum_{r = 0}^3 \left(4 + 8r\right)$$
+Since the `foodMap` is in shape of a `square`, the dimensions are `m*m` where `m` is the `sqrt` of this result. 
+```cpp
+FoodItem* foodMap[8][8] = {0};
+```
+The constructor will iterate over this `map` and create `rand()` based food object and the address of it is stored in the grid.
+Then this grid can be utilized inside `foodEaten(Player&)` function.
+
+<figure>
+    <img src="./img/foodmap.png">
+    <figcaption>Fig 3.1 - Example of <code>foodMap</code> in memory</figcaption>
+</figure>
 
 Now let's explain the interface, the `public` functions. But first, let's get the `getter` and `setter` functions out of the way.
 ```cpp
@@ -528,7 +536,11 @@ for (int j = i; j < foodPerSide + i; j++) {
 }
 ```
 Since the array is in shape of a _square_ so we can use `z` as index for columns, set equal to `i`, the offset and it works because of the symmetric property of _squares_.  
-The loop which actually updates the positions, look something like:
+The optional `gap` between the tiles is handled by
+```cpp
+((x > 3) ? gap : 0)
+```
+where `x` can be either row or column index
 ```cpp
 while (z < foodPerSide + i) {
     foodMap[j][z]->setPosition(sf::Vector2f(
