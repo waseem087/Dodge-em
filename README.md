@@ -3,6 +3,7 @@
 - cmake
 - C++ compiler
   
+Without the compiler, `cmake` won't be able to work.
 You can clone the project using command
 ```
 git clone https://github.com/waseem087/Dodge-em.git
